@@ -1,5 +1,5 @@
 class World {
-  player = new Character();
+  player = new Player();
   enemies = [new EnemyFish(), new EnemyFish(), new EnemyFish()];
 
   light = new Light();
@@ -37,7 +37,7 @@ class World {
     });
   }
 
-  
+
 
   addToMap(obj) {
     this.ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height);
