@@ -1,6 +1,13 @@
 class World {
   player = new Character();
   enemies = [new EnemyFish(), new EnemyFish(), new EnemyFish()];
+
+  light = new Light();
+  floor = new Floor1();
+  bgwater = new bgWater();
+  bgfondo1 = new bgFondo1();
+  bgfondo2 = new bgFondo2();
+  
   ctx;
   canvas;
   constructor(canvas) {
@@ -10,18 +17,29 @@ class World {
   }
 
   draw() {
-    let pl = this.player;
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.right);
-    
-    this.ctx.drawImage(pl.img, pl.x, pl.y, pl.width, pl.height);
-    this.enemies.forEach(enemy => {
-        this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height);
-        
-    });
 
+    this.addToMap(this.bgwater);
+    this.addToMap(this.bgfondo2);
+    this.addToMap(this.bgfondo1);
+    this.addToMap(this.floor);
+
+    this.addToMap(this.player);
+
+    this.enemies.forEach((enemy) => {
+      this.addToMap(enemy);
+    });
+    this.addToMap(this.light);
+    
     let self = this;
     requestAnimationFrame(function () {
       self.draw();
     });
+  }
+
+  
+
+  addToMap(obj) {
+    this.ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height);
   }
 }
