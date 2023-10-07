@@ -1,0 +1,4 @@
+class EnemyFish extends MovableObject{
+
+    
+}
