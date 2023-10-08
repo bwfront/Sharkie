@@ -8,14 +8,26 @@ class World {
   bgfondo1 = new bgFondo1();
   bgfondo2 = new bgFondo2();
   
-  ctx;
   canvas;
-  constructor(canvas) {
+  ctx;
+  keyboard;
+  constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
+    this.keyboard = keyboard;
     this.draw();
+    this.setWorld();
   }
 
+  setWorld(){
+    this.player.setWorld(this);
+  }
+  checkKeyboardState() {
+  console.log('UP:', this.keyboard.UP);
+  console.log('LEFT:', this.keyboard.LEFT);
+  console.log('DOWN:', this.keyboard.DOWN);
+  console.log('RIGHT:', this.keyboard.RIGHT);
+}
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.right);
 
