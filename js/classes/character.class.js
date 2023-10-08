@@ -4,6 +4,7 @@ class Player extends MovableObject {
   height = 160;
   width = 160;
   speed = 1;
+  health = 100;
   IMAGES_SWIM = [
     "../img/1.Sharkie/3.Swim/1.png",
     "../img/1.Sharkie/3.Swim/3.png",
@@ -29,6 +30,21 @@ class Player extends MovableObject {
     "../img/1.Sharkie/1.IDLE/16.png",
     "../img/1.Sharkie/1.IDLE/17.png",
     "../img/1.Sharkie/1.IDLE/18.png",
+  ];
+
+  IMAGES_DEAD = [
+    "../img/1.Sharkie/6.dead/1.Poisoned/1.png",
+    "../img/1.Sharkie/6.dead/1.Poisoned/2.png",
+    "../img/1.Sharkie/6.dead/1.Poisoned/3.png",
+    "../img/1.Sharkie/6.dead/1.Poisoned/4.png",
+    "../img/1.Sharkie/6.dead/1.Poisoned/5.png",
+    "../img/1.Sharkie/6.dead/1.Poisoned/6.png",
+    "../img/1.Sharkie/6.dead/1.Poisoned/7.png",
+    "../img/1.Sharkie/6.dead/1.Poisoned/8.png",
+    "../img/1.Sharkie/6.dead/1.Poisoned/9.png",
+    "../img/1.Sharkie/6.dead/1.Poisoned/10.png",
+    "../img/1.Sharkie/6.dead/1.Poisoned/11.png",
+    "../img/1.Sharkie/6.dead/1.Poisoned/12.png",
   ];
 
   world;
@@ -72,30 +88,30 @@ class Player extends MovableObject {
     //SWIM Animation
     this.loadImages(this.IMAGES_SWIM);
     this.loadImages(this.IMAGES_IDLE);
+    this.loadImages(this.IMAGES_DEAD);
     setInterval(() => {
-        if (
-            this.world.keyboard.RIGHT ||
-            this.world.keyboard.LEFT ||
-            this.world.keyboard.DOWN ||
-            this.world.keyboard.UP
-        ) {
-          this.playAnimation(this.IMAGES_SWIM);
-            this.swim_sound.play();
-        } else if (
-            !this.world.keyboard.RIGHT &&
-            !this.world.keyboard.LEFT &&
-            !this.world.keyboard.DOWN &&
-            !this.world.keyboard.UP
-        ) {
-          this.swim_sound.pause();
-          this.playAnimation(this.IMAGES_IDLE);
-        }
+      if (
+        this.world.keyboard.RIGHT ||
+        this.world.keyboard.LEFT ||
+        this.world.keyboard.DOWN ||
+        this.world.keyboard.UP
+      ) {
+        this.playAnimation(this.IMAGES_SWIM);
+        this.swim_sound.play();
+      } else if (
+        !this.world.keyboard.RIGHT &&
+        !this.world.keyboard.LEFT &&
+        !this.world.keyboard.DOWN &&
+        !this.world.keyboard.UP
+      ) {
+        this.swim_sound.pause();
+        this.playAnimation(this.IMAGES_IDLE);
+      }
     }, 1000 / 7);
-
-
   }
 
-  moveRight() {}
-  moveUp() {}
-  moveDown() {}
+  die(){
+    console.log("PLayer is Dead");
+    this.playAnimation(this.IMAGES_DEAD);
+  }
 }

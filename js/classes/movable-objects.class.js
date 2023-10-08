@@ -8,6 +8,7 @@ class MovableObject {
   currentImage = 0;
   speed;
   otherDirection = false;
+  health;
 
   loadImage(path) {
     this.img = new Image();
@@ -22,7 +23,34 @@ class MovableObject {
     });
   }
 
-  playAnimation(images){
+  draw(ctx) {
+    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+  }
+
+  drawRectangle(ctx) {
+    //Rectangle Red
+    if (
+      this instanceof Player ||
+      this instanceof EnemyFish ||
+      this instanceof Endboss
+    ) {
+      ctx.beginPath();
+      ctx.lineWidth = "5";
+      ctx.strokeStyle = "Red";
+      ctx.rect(this.x, this.y, this.width, this.height);
+      ctx.stroke();
+    }
+  }
+
+  isColliding(obj) {
+    return (
+      this.x + this.width >= obj.x &&
+      this.x <= obj.x + obj.width 
+
+    );
+  }
+
+  playAnimation(images) {
     let i = this.currentImage % images.length;
     let path = images[i];
     this.img = this.imagesCache[path];
