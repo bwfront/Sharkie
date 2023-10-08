@@ -7,10 +7,12 @@ class World {
   bgwater = new bgWater();
   bgfondo1 = new bgFondo1();
   bgfondo2 = new bgFondo2();
-  
+
   canvas;
   ctx;
   keyboard;
+
+
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -20,14 +22,9 @@ class World {
   }
 
   setWorld(){
-    this.player.setWorld(this);
+    this.player.world = this;
   }
-  checkKeyboardState() {
-  console.log('UP:', this.keyboard.UP);
-  console.log('LEFT:', this.keyboard.LEFT);
-  console.log('DOWN:', this.keyboard.DOWN);
-  console.log('RIGHT:', this.keyboard.RIGHT);
-}
+
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.right);
 
@@ -42,14 +39,12 @@ class World {
       this.addToMap(enemy);
     });
     this.addToMap(this.light);
-    
+
     let self = this;
     requestAnimationFrame(function () {
       self.draw();
     });
   }
-
-
 
   addToMap(obj) {
     this.ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height);

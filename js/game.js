@@ -7,18 +7,40 @@ function init() {
   world = new World(canvas, keyboard);
 }
 
-document.addEventListener('keypress', (event) => {
-    var name = event.key;
-    if(name == "w"){
+
+window.addEventListener('keydown',  (e) =>{
+    if(e.code === 'KeyW'){
         keyboard.UP = true;
     }
-    if(name == "a"){
+    if(e.code === 'KeyA'){
         keyboard.LEFT = true;
     }
-    if(name == "s"){
+    if(e.code === 'KeyS'){
         keyboard.DOWN = true;
     }
-    if(name == "d"){
+    if(e.code === 'KeyD'){
         keyboard.RIGHT = true;
     }
-  }, false);
+    if(e.code === 'Space'){
+        keyboard.SPACE = true;
+    }  
+});
+
+window.addEventListener('keyup',  (e) =>{
+    if(e.code === 'KeyW'){
+        keyboard.UP = false;
+    }
+    if(e.code === 'KeyA'){
+        keyboard.LEFT = false;
+    }
+    if(e.code === 'KeyS'){
+        keyboard.DOWN = false;
+    }
+    if(e.code === 'KeyD'){
+        keyboard.RIGHT = false;
+    }
+    if(e.code === 'Space'){
+        console.log(keyboard)
+        keyboard.SPACE = false;
+    }  
+});
