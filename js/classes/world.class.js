@@ -1,17 +1,12 @@
 class World {
   player = new Player();
-  enemies = [new EnemyFish(), new EnemyFish(), new EnemyFish()];
-
-  light = new Light();
-  floor = new Floor1();
-  bgwater = new bgWater();
-  bgfondo1 = new bgFondo1();
-  bgfondo2 = new bgFondo2();
-
+  enemies = level1.enemies;
+  backgroundObjects = level1.backgroundObjects;
+  
   canvas;
   ctx;
   keyboard;
-
+  camera_x = 0;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -21,32 +16,43 @@ class World {
     this.setWorld();
   }
 
-  setWorld(){
+  setWorld() {
     this.player.world = this;
   }
 
   draw() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.right);
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.translate(this.camera_x, 0);
 
-    this.addToMap(this.bgwater);
-    this.addToMap(this.bgfondo2);
-    this.addToMap(this.bgfondo1);
-    this.addToMap(this.floor);
-
-    this.addToMap(this.player);
-
-    this.enemies.forEach((enemy) => {
-      this.addToMap(enemy);
-    });
-    this.addToMap(this.light);
+    this.addToMapArray(this.backgroundObjects);
+    this.addToMapArray(this.enemies);
 
     let self = this;
     requestAnimationFrame(function () {
       self.draw();
     });
+
+    this.addToMap(this.player);
+    this.ctx.translate(-this.camera_x, 0);
+  }
+
+  addToMapArray(y){
+    y.forEach((x) => {
+      this.addToMap(x);
+    });
   }
 
   addToMap(obj) {
+    if (obj.otherDirection) {
+      this.ctx.save();
+      this.ctx.translate(obj.width, 0);
+      this.ctx.scale(-1, 1);
+      obj.x = obj.x * -1;
+    }
     this.ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height);
+    if (obj.otherDirection) {
+      obj.x = obj.x * -1;
+      this.ctx.restore();
+    }
   }
 }
