@@ -1,8 +1,8 @@
 class Player extends MovableObject {
   x = 40;
   y = 150;
-  height = 230;
-  width = 230;
+  height = 160;
+  width = 160;
   speed = 1;
   IMAGES_SWIM = [
     "../img/1.Sharkie/3.Swim/1.png",
@@ -79,10 +79,7 @@ class Player extends MovableObject {
             this.world.keyboard.DOWN ||
             this.world.keyboard.UP
         ) {
-            let i = this.currentImage % this.IMAGES_SWIM.length;
-            let path = this.IMAGES_SWIM[i];
-            this.img = this.imagesCache[path];
-            this.currentImage++;
+          this.playAnimation(this.IMAGES_SWIM);
             this.swim_sound.play();
         } else if (
             !this.world.keyboard.RIGHT &&
@@ -91,10 +88,7 @@ class Player extends MovableObject {
             !this.world.keyboard.UP
         ) {
           this.swim_sound.pause();
-            let i = this.currentImage % this.IMAGES_IDLE.length;
-            let path = this.IMAGES_IDLE[i];
-            this.img = this.imagesCache[path];
-            this.currentImage++;
+          this.playAnimation(this.IMAGES_IDLE);
         }
     }, 1000 / 7);
 

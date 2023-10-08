@@ -27,10 +27,7 @@ class EnemyFish extends MovableObject {
       this.moveLeft();
       
       setInterval(() =>{
-        let i = this.currentImage % this.IMAGES_SWIM.length;
-        let path = this.IMAGES_SWIM[i];
-        this.img = this.imagesCache[path];
-        this.currentImage++;
+          this.playAnimation(this.IMAGES_SWIM);
       },1000 / 7);
   }
 
