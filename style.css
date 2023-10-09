@@ -10,6 +10,7 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-image: url('../img/3. Background/Legacy/Layers/5. Water/L3.png');
 }
 #mainmenu{
 
@@ -17,11 +18,11 @@ body{
     width: 720px;
     background-image: url('../img/3. Background/Mesa de trabajo 1.png');
     background-size: contain;
-    box-shadow: 0px 0px 37px 7px rgba(243, 133, 255, 0.6);
+    box-shadow: 0px 0px 37px 7px rgb(255, 255, 255);
 }
 #heading{
     text-align: center;
-    margin: 50px;
+    margin: -50px;
     font-size: 60px;
     color: #ffffff;
     text-shadow: 3px 3px 10px rgb(197, 17, 209);
@@ -32,13 +33,51 @@ body{
     align-items: flex-end;
 }
 .start-button{
+    cursor: pointer;
     height: 70px;
-    margin: 200px;
+    margin: 310px;
 }
 .start-button:hover{
     box-shadow: 0px 0px 37px 7px rgba(243, 133, 255, 0.6);
     border-radius: 20px;
 
+}
+.icon{
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px;
+    filter: invert();
+}
+.icon-img{
+    cursor: pointer;
+    background-color: rgb(149, 210, 28);
+    border-radius: 26px;
+    border: solid 2px #000000;
+    padding: 5px;
+    width: 40px;
+}
+.icon-img:hover{
+    box-shadow: 0px 0px 10px 7px rgba(165, 152, 0, 0.6);
+}
+.control-con{
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 60px;
+}
+.control-img{
+    height: 120px;
+    margin-right: 40px;
+}
+.space{
+    height: 60px;
+}
+.control-content{
+    margin: 40px;
+    font-size: 35px;
+    display: flex;
+    align-items: center;
 }
 canvas{
     background-color: #000000;
