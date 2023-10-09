@@ -6,6 +6,9 @@ class World {
   ctx;
   keyboard;
   camera_x = 0;
+  statusBarHealth = new StatusBarHealth();
+  statusBarCoin = new StatusBarCoin();
+  statusBarPoisen = new StatusBarPoisen();
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -14,21 +17,43 @@ class World {
     this.draw();
     this.setWorld();
     this.checkCollision();
+    this.checkCollisionCoin();
+    this.checkCollisionPoisen();
   }
 
   setWorld() {
     this.player.world = this;
   }
 
-  checkCollision(){
+  checkCollision() {
     setInterval(() => {
-      this.level.enemies.forEach((enemy) =>{
-        if(this.player.isColliding(enemy)){
+      this.level.enemies.forEach((enemy) => {
+        if (this.player.isColliding(enemy)) {
           this.player.hit();
-          console.log(this.player.health);
+          this.statusBarHealth.setHealth(this.player.health);
         }
       });
-    }, 200)
+    }, 200);
+  }
+  checkCollisionCoin() {
+    setInterval(() => {
+      this.level.coins.forEach((coin) => {
+        if (this.player.isColliding(coin)) {
+          this.player.addCoin();
+          this.statusBarCoin.setCoin(this.player.coin);
+        }
+      });
+    }, 200);
+  }
+  checkCollisionPoisen() {
+    setInterval(() => {
+      this.level.poisen.forEach((poisen) => {
+        if (this.player.isColliding(poisen)) {
+          this.player.addPoisen();
+          this.statusBarPoisen.setPoisen(this.player.poisen);
+        }
+      });
+    }, 200);
   }
 
   draw() {
@@ -47,6 +72,9 @@ class World {
 
     this.addToMap(this.player);
     this.ctx.translate(-this.camera_x, 0);
+    this.addToMap(this.statusBarHealth);
+    this.addToMap(this.statusBarCoin);
+    this.addToMap(this.statusBarPoisen);
   }
 
   addToMapArray(y) {

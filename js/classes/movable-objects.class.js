@@ -1,47 +1,9 @@
-class MovableObject {
-  x;
-  y;
-  img;
-  height;
-  width;
-  imagesCache = [];
-  currentImage = 0;
+class MovableObject extends DrawableObject{
   speed;
   otherDirection = false;
-  health = 100;
   lastHit = 0;
-
-  loadImage(path) {
-    this.img = new Image();
-    this.img.src = path;
-  }
-
-  loadImages(arr) {
-    arr.forEach((path) => {
-      let img = new Image();
-      img.src = path;
-      this.imagesCache[path] = img;
-    });
-  }
-
-  draw(ctx) {
-    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-  }
-
-  drawRectangle(ctx) {
-    //Rectangle Red
-    if (
-      this instanceof Player ||
-      this instanceof EnemyFish ||
-      this instanceof Endboss
-    ) {
-      ctx.beginPath();
-      ctx.lineWidth = "5";
-      ctx.strokeStyle = "Red";
-      ctx.rect(this.x, this.y, this.width, this.height);
-      ctx.stroke();
-    }
-  }
+  coin = 0;
+  poisen = 0;
 
   isColliding(obj) {
     return this.x + this.width >= obj.x && this.x <= obj.x + obj.width;
@@ -64,6 +26,14 @@ class MovableObject {
   isDead() {
     return this.health == 0;
   }
+
+  addCoin(){
+    this.coin += 10;
+  }
+  addPoisen(){
+    this.poisen += 10;
+  }
+
   playAnimation(images) {
     let i = this.currentImage % images.length;
     let path = images[i];
