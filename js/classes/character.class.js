@@ -46,6 +46,11 @@ class Player extends MovableObject {
     "../img/1.Sharkie/6.dead/1.Poisoned/11.png",
     "../img/1.Sharkie/6.dead/1.Poisoned/12.png",
   ];
+  IMAGES_HURT = [
+    "../img/1.Sharkie/5.Hurt/2.Electric shock/1.png",
+    "../img/1.Sharkie/5.Hurt/2.Electric shock/2.png",
+    "../img/1.Sharkie/5.Hurt/2.Electric shock/3.png",
+  ];
 
   world;
 
@@ -59,38 +64,44 @@ class Player extends MovableObject {
   animate() {
     //SWIM
     setInterval(() => {
-      if (this.world.keyboard.RIGHT) {
-        if (this.x < 760) {
-          this.x += this.speed;
-          this.otherDirection = false;
-          this.world.camera_x += -this.speed;
+      if (!this.isDead()) {
+        if (this.world.keyboard.RIGHT) {
+          if (this.x < 760) {
+            this.x += this.speed;
+            this.otherDirection = false;
+            this.world.camera_x += -this.speed;
+          }
         }
-      }
-      if (this.world.keyboard.LEFT) {
-        if (this.x > 40) {
-          this.x -= this.speed;
-          this.otherDirection = true;
-          this.world.camera_x += this.speed;
+        if (this.world.keyboard.LEFT) {
+          if (this.x > 40) {
+            this.x -= this.speed;
+            this.otherDirection = true;
+            this.world.camera_x += this.speed;
+          }
         }
-      }
-      if (this.world.keyboard.UP) {
-        if (this.y > -80) {
-          this.y -= this.speed;
+        if (this.world.keyboard.UP) {
+          if (this.y > -80) {
+            this.y -= this.speed;
+          }
         }
-      }
-      if (this.world.keyboard.DOWN) {
-        if (this.y < 280) {
-          this.y += this.speed;
+        if (this.world.keyboard.DOWN) {
+          if (this.y < 280) {
+            this.y += this.speed;
+          }
         }
       }
     }, 1000 / 60);
-
     //SWIM Animation
     this.loadImages(this.IMAGES_SWIM);
     this.loadImages(this.IMAGES_IDLE);
+    this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
     setInterval(() => {
-      if (
+      if (this.isDead()) {
+        this.playAnimation(this.IMAGES_DEAD);
+      }else if(this.isHurt()){
+        this.playAnimation(this.IMAGES_HURT);
+      } else if (
         this.world.keyboard.RIGHT ||
         this.world.keyboard.LEFT ||
         this.world.keyboard.DOWN ||
@@ -98,20 +109,10 @@ class Player extends MovableObject {
       ) {
         this.playAnimation(this.IMAGES_SWIM);
         this.swim_sound.play();
-      } else if (
-        !this.world.keyboard.RIGHT &&
-        !this.world.keyboard.LEFT &&
-        !this.world.keyboard.DOWN &&
-        !this.world.keyboard.UP
-      ) {
+      } else {
         this.swim_sound.pause();
         this.playAnimation(this.IMAGES_IDLE);
       }
     }, 1000 / 7);
-  }
-
-  die(){
-    console.log("PLayer is Dead");
-    this.playAnimation(this.IMAGES_DEAD);
   }
 }

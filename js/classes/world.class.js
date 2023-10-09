@@ -20,19 +20,15 @@ class World {
     this.player.world = this;
   }
 
-  checkCollision() {
+  checkCollision(){
     setInterval(() => {
-      this.level.enemies.forEach((enemy) => {
-        if (this.player.health > 0) {
-          if (this.player.isColliding(enemy)) {
-            this.player.health -= 10;
-            if (this.player.health <= 0) {
-              this.player.die();
-            }
-          }
+      this.level.enemies.forEach((enemy) =>{
+        if(this.player.isColliding(enemy)){
+          this.player.hit();
+          console.log(this.player.health);
         }
       });
-    }, 200);
+    }, 200)
   }
 
   draw() {

@@ -8,7 +8,8 @@ class MovableObject {
   currentImage = 0;
   speed;
   otherDirection = false;
-  health;
+  health = 100;
+  lastHit = 0;
 
   loadImage(path) {
     this.img = new Image();
@@ -43,13 +44,26 @@ class MovableObject {
   }
 
   isColliding(obj) {
-    return (
-      this.x + this.width >= obj.x &&
-      this.x <= obj.x + obj.width 
-
-    );
+    return this.x + this.width >= obj.x && this.x <= obj.x + obj.width;
   }
 
+  hit() {
+    this.health -= 5;
+    if (this.health < 0) {
+      this.health = 0;
+    } else {
+      this.lastHit = new Date().getTime();
+    }
+  }
+  isHurt() {
+    let timePassed = new Date().getTime() - this.lastHit;
+    timePassed = timePassed / 1000;
+    return timePassed < 2;
+  }
+
+  isDead() {
+    return this.health == 0;
+  }
   playAnimation(images) {
     let i = this.currentImage % images.length;
     let path = images[i];
