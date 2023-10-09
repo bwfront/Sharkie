@@ -54,11 +54,12 @@ class Player extends MovableObject {
 
   world;
 
-  swim_sound = new Audio("audio/sharkswim.mp3");
-
+  swim_sound = new Audio('audio/sharkswim.mp3');
+  
   constructor() {
     super().loadImage("");
     this.animate();
+    this.swim_sound.volume = 0.5;
   }
 
   animate() {
@@ -99,6 +100,7 @@ class Player extends MovableObject {
     setInterval(() => {
       if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
+        this.swim_sound.pause();
       }else if(this.isHurt()){
         this.playAnimation(this.IMAGES_HURT);
       } else if (

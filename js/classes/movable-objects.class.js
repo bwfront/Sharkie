@@ -4,15 +4,28 @@ class MovableObject extends DrawableObject{
   lastHit = 0;
   coin = 0;
   poisen = 0;
-
+  coin_sound = new Audio('audio/coin.wav');
+  die_sound = new Audio('../audio/die.wav');
+  i = 0;
   isColliding(obj) {
-    return this.x + this.width >= obj.x && this.x <= obj.x + obj.width;
+    return (
+        this.x + this.width >= obj.x &&
+        this.x <= obj.x + obj.width &&
+        this.y + this.height >= obj.y &&
+        this.y <= obj.y + obj.height
+    );
   }
 
   hit() {
     this.health -= 5;
     if (this.health < 0) {
       this.health = 0;
+      if(this.i < 25){
+          this.die_sound.play();
+          this.i++;
+      }else{
+        this.die_sound.pause();
+      }
     } else {
       this.lastHit = new Date().getTime();
     }
@@ -28,10 +41,12 @@ class MovableObject extends DrawableObject{
   }
 
   addCoin(){
-    this.coin += 10;
+    this.coin_sound.play();
+    this.coin += 20;
   }
   addPoisen(){
-    this.poisen += 10;
+    this.coin_sound.play();
+    this.poisen += 20;
   }
 
   playAnimation(images) {

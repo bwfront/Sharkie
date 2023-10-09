@@ -24,13 +24,12 @@ class Poisen extends MovableObject{
       
         this.loadImages(this.IMAGES_IDLE);
         this.animate();
-    
       }
       animate(){
         setInterval(() =>{
             this.playAnimation(this.IMAGES_IDLE);
         },1000 / 7);
     }
-  
+
   }
   

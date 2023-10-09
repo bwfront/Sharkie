@@ -27,7 +27,7 @@ class StatusBarCoin extends DrawableObject {
   }
 
   getCoinIndex() {
-    if (this.playercoin > 100) {
+    if (this.playercoin >= 100) {
       return 5;
     } else if (this.playercoin >= 80) {
       return 4;

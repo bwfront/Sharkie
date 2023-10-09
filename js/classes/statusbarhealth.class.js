@@ -35,7 +35,7 @@ class StatusBarHealth extends DrawableObject {
       return 2;
     } else if (this.playerhealth >= 40) {
       return 3;
-    } else if (this.playerhealth >= 20) {
+    } else if (this.playerhealth > 0) {
       return 4;
     } else if (this.playerhealth = 0){
       return 5;

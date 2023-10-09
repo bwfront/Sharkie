@@ -27,7 +27,7 @@ class StatusBarPoisen extends DrawableObject {
   }
 
   getPoisenIndex() {
-    if (this.playerPoisen > 100) {
+    if (this.playerPoisen >= 100) {
       return 5;
     } else if (this.playerPoisen >= 80) {
       return 4;
