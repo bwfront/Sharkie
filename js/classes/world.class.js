@@ -1,7 +1,7 @@
 class World {
   player = new Player();
   level = level1;
-  background_audio = new Audio('audio/bgmusic.mp3');
+  background_audio = new Audio("audio/bgmusic.mp3");
   canvas;
   ctx;
   keyboard;
@@ -26,65 +26,74 @@ class World {
   }
 
   run() {
-    this.checkCollision();
-    this.checkCollisionCoin();
-    this.checkCollisionPoisen();
-    this.checkPoisenThrow();
+    setInterval(() => {
+      this.checkCollision();
+      this.checkCollisionCoin();
+      this.checkCollisionPoisen();
+      this.checkPoisenThrow();
+      this.checkThrowPoisenHitsEnemy();
+    }, 200);
+  }
+
+  checkThrowPoisenHitsEnemy() {
+    for (let i = this.throwPoisen.length - 1; i >= 0; i--) {
+      let bottle = this.throwPoisen[i];
+      for (let j = this.level.enemies.length - 1; j >= 0; j--) {
+        let enemy = this.level.enemies[j];
+        if (bottle.isColliding(enemy)) {
+          this.level.enemies.splice(j, 1);
+          this.throwPoisen.splice(i, 1);
+          break;
+        }
+      }
+    }
   }
   checkCollision() {
-    setInterval(() => {
-      this.level.enemies.forEach((enemy) => {
-        if (this.player.isColliding(enemy)) {
-          this.player.hit();
-          this.statusBarHealth.setHealth(this.player.health);
-        }
-      });
-    }, 200);
+    this.level.enemies.forEach((enemy) => {
+      if (this.player.isColliding(enemy)) {
+        this.player.hit();
+        this.statusBarHealth.setHealth(this.player.health);
+      }
+    });
   }
 
   checkPoisenThrow() {
-    setInterval(() => {
-      if (this.keyboard.E) {
-        if(this.player.poisen > 0){
-          let bottle = new ThrowPoisen(this.player.x, this.player.y);
-          this.throwPoisen.push(bottle);
-          let checkThrow = true;
-          this.player.poisen -= 20;
-          if(this.throwPoisen && checkThrow){
-            checkThrow = false;
-            setInterval(() => {
-              this.throwPoisen.splice(0);
-            }, 700);
-          }
+    if (this.keyboard.E) {
+      if (this.player.poisen > 0) {
+        let bottle = new ThrowPoisen(this.player.x, this.player.y);
+        this.throwPoisen.push(bottle);
+        let checkThrow = true;
+        this.player.poisen -= 20;
+        if (this.throwPoisen && checkThrow) {
+          checkThrow = false;
+          setInterval(() => {
+            this.throwPoisen.splice(0);
+          }, 700);
         }
       }
-    }, 100);
+    }
   }
 
   checkCollisionCoin() {
-    setInterval(() => {
-      for (let i = this.level.coins.length - 1; i >= 0; i--) {
-        let coin = this.level.coins[i];
-        if (this.player.isColliding(coin)) {
-          this.player.addCoin();
-          this.statusBarCoin.setCoin(this.player.coin);
-          this.level.coins.splice(i, 1);
-        }
+    for (let i = this.level.coins.length - 1; i >= 0; i--) {
+      let coin = this.level.coins[i];
+      if (this.player.isColliding(coin)) {
+        this.player.addCoin();
+        this.statusBarCoin.setCoin(this.player.coin);
+        this.level.coins.splice(i, 1);
       }
-    }, 200);
+    }
   }
-  
+
   checkCollisionPoisen() {
-    setInterval(() => {
-      this.statusBarPoisen.setPoisen(this.player.poisen);
-      for (let i = this.level.poisen.length - 1; i >= 0; i--) {
-        let poisen = this.level.poisen[i];
-        if (this.player.isColliding(poisen)) {
-          this.player.addPoisen();
-          this.level.poisen.splice(i, 1);
-        }
+    this.statusBarPoisen.setPoisen(this.player.poisen);
+    for (let i = this.level.poisen.length - 1; i >= 0; i--) {
+      let poisen = this.level.poisen[i];
+      if (this.player.isColliding(poisen)) {
+        this.player.addPoisen();
+        this.level.poisen.splice(i, 1);
       }
-    }, 200);
+    }
   }
 
   draw() {
