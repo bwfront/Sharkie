@@ -5,6 +5,7 @@ class World {
   canvas;
   ctx;
   keyboard;
+  l = 0;
   camera_x = 0;
   statusBarHealth = new StatusBarHealth();
   statusBarCoin = new StatusBarCoin();
@@ -34,9 +35,17 @@ class World {
       this.checkPoisenThrow();
       this.checkThrowPoisenHitsEnemy();
       this.checkThrowPoisenHitsEndboss();
+      this.distanceEndbossPlayer();
+      this.checkCollisionEndboss();
     }, 200);
   }
-
+  
+  distanceEndbossPlayer(){
+    if(this.player.x > 600 && this.l == 0){
+      this.l++;
+      this.level.endboss[0].attack();
+    }
+  }
   checkThrowPoisenHitsEndboss() {
     for (let i = this.throwPoisen.length - 1; i >= 0; i--) {
       let bottle = this.throwPoisen[i];
@@ -69,6 +78,17 @@ class World {
       }
     }
   }
+
+
+  checkCollisionEndboss() {
+    this.level.endboss.forEach((endboss) => {
+      if (this.player.isColliding(endboss)) {
+        this.player.hit();
+        this.statusBarHealth.setHealth(this.player.health);
+      }
+    });
+  }
+
   checkCollision() {
     this.level.enemies.forEach((enemy) => {
       if (this.player.isColliding(enemy)) {

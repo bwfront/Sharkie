@@ -26,18 +26,20 @@ class Endboss extends MovableObject{
         '../img/2.Enemy/3 Final Enemy/Hurt/4.png',
     ];
     endbosshit_audio = new Audio('../audio/endbosshit.mp3');
-    constructor(){
+    constructor(player){
         super().loadImage(
             "../img/2.Enemy/3 Final Enemy/2.floating/1.png"
           );
         this.loadImages(this.IMAGES_SWIM);
         this.loadImages(this.IMAGES_HIT);
         this.animate();
-
+        console.log(player);
+        
     }
 
     attack(){
-        //attack logic
+        this.speed = 3;
+        this.moveLeft();
     }
 
     hit() {
