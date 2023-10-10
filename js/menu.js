@@ -4,9 +4,8 @@ function mainMenuStart() {
   menu.style.display = "none";
   canvas.style.display = "unset";
   init();
-
-  fullscreen = document.getElementById("fullscreen");
 }
+
 function displayMenu() {
   canvas = document.getElementById("canvas");
   menu = document.getElementById("mainmenu");
@@ -14,10 +13,11 @@ function displayMenu() {
   canvas.style.display = "none";
   world[0].background_audio.pause();
 }
+
 function GameOverMenu() {
+  document.exitFullscreen();
   displayMenu();
   GameOverHTML();
-  fullscreen = document.getElementById("fullscreen");
 }
 
 function closeControl() {
@@ -73,18 +73,15 @@ function GameOverHTML() {
       `;
 }
 
-function mainMenuFullscreen() {
-  const canvas = document.getElementById("canvas");
-  canvas.style.display = "unset";
-}
-
 function menuVictory() {
+  document.exitFullscreen();
   displayMenu();
   let victory_sound = new Audio("./audio/victory.mp3");
   victory_sound.play();
   const menu = document.getElementById("mainmenu");
   menu.innerHTML = menuVictoryHTML();
 }
+
 function menuVictoryHTML() {
   return `
     <a class="icon" onclick="openControl()">

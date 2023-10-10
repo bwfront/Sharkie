@@ -6,6 +6,7 @@
 body{
     margin: 0;
     height: 100vh;
+    max-height: 100vh;
     font-family: "Luckyiest Guy";
     display: flex;
     justify-content: center;
@@ -14,8 +15,24 @@ body{
     background-image: url('./img/3. Background/Legacy/Layers/5. Water/L3.png');
     background-size: cover;
 }
+.fullscreen{
+    font-size: 18px;
+    margin-top: 415px;
+    color: #ffffff;
+    z-index: 1;
+    cursor: pointer;
+    padding-bottom: 5px !important;
+    padding: 10px;
+    background-color: #bf077f;
+    border-radius: 10px;
+    border: solid 2px #ffffff;
+    position: fixed;
+}
+.fullscreen:hover{
+    box-shadow: 0px 0px 37px 7px rgba(243, 133, 255, 0.6);
+}
 #mainmenu{
-
+    z-index: 2;
     height: 480px;
     width: 720px;
     background-image: url('./img/3. Background/Mesa de trabajo 1.png');
@@ -37,7 +54,7 @@ body{
 .start-button{
     cursor: pointer;
     height: 70px;
-    margin: 310px;
+    margin-top: 310px;
 }
 .start-button:hover{
     box-shadow: 0px 0px 37px 7px rgba(243, 133, 255, 0.6);
@@ -89,6 +106,5 @@ body{
 }
 canvas{
     background-color: #000000;
-    box-shadow: 0px 0px 37px 7px rgba(243, 133, 255, 0.6);
-
+    box-shadow: 0px 0px 37px 7px rgb(255, 255, 255);
 }

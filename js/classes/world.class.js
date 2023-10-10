@@ -26,7 +26,6 @@ class World {
   setWorld() {
     this.player.world = this;
   }
-
   run() {
     setInterval(() => {
       this.checkCollision();
