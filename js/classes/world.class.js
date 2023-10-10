@@ -1,6 +1,6 @@
 class World {
   player = new Player();
-  level = level1;
+  level;
   background_audio = new Audio("audio/bgmusic.mp3");
   canvas;
   ctx;
@@ -14,6 +14,7 @@ class World {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
+    this.level = createLevel1();
     this.draw();
     this.setWorld();
     this.run();

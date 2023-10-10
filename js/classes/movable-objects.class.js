@@ -7,6 +7,7 @@ class MovableObject extends DrawableObject{
   coin_sound = new Audio('audio/coin.wav');
   die_sound = new Audio('../audio/die.wav');
   i = 0;
+  j = 0;
   isColliding(obj) {
     return (
         this.x + this.width >= obj.x &&
@@ -20,7 +21,7 @@ class MovableObject extends DrawableObject{
     this.health -= 5;
     if (this.health < 0) {
       this.health = 0;
-      if(this.i < 25){
+      if(this.i < 15){
           this.die_sound.play();
           this.i++;
       }else{
@@ -37,6 +38,10 @@ class MovableObject extends DrawableObject{
   }
 
   isDead() {
+    if(this.health == 0 && this.j == 0){
+      this.j++;
+      GameOverMenu();
+    }
     return this.health == 0;
   }
 
