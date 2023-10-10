@@ -4,19 +4,21 @@
 }
 
 body{
-    height: 80vh;
+    margin: 0;
+    height: 100vh;
     font-family: "Luckyiest Guy";
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-image: url('../img/3. Background/Legacy/Layers/5. Water/L3.png');
+    background-image: url('./img/3. Background/Legacy/Layers/5. Water/L3.png');
+    background-size: cover;
 }
 #mainmenu{
 
     height: 480px;
     width: 720px;
-    background-image: url('../img/3. Background/Mesa de trabajo 1.png');
+    background-image: url('./img/3. Background/Mesa de trabajo 1.png');
     background-size: contain;
     box-shadow: 0px 0px 37px 7px rgb(255, 255, 255);
 }

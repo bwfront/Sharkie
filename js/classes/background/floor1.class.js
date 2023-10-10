@@ -4,6 +4,6 @@ class Floor1 extends MovableObject{
     height = 400;
     width = 1440;
     constructor(){
-        super().loadImage('../img/3. Background/Legacy/Layers/2. Floor/L3.png');
+        super().loadImage('./img/3. Background/Legacy/Layers/2. Floor/L3.png');
     }
 }

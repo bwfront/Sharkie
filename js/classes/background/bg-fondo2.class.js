@@ -4,6 +4,6 @@ class bgFondo2 extends MovableObject{
     height = 550;
     width = 1440;
     constructor(){
-        super().loadImage('../img/3. Background/Legacy/Layers/4.Fondo 2/D3.png');
+        super().loadImage('./img/3. Background/Legacy/Layers/4.Fondo 2/D3.png');
     }
 }

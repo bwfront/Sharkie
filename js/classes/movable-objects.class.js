@@ -4,8 +4,8 @@ class MovableObject extends DrawableObject{
   lastHit = 0;
   coin = 0;
   poisen = 80;
-  coin_sound = new Audio('audio/coin.wav');
-  die_sound = new Audio('../audio/die.wav');
+  coin_sound = new Audio('./audio/coin.wav');
+  die_sound = new Audio('./audio/die.wav');
   i = 0;
   j = 0;
   isColliding(obj) {

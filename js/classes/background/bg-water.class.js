@@ -4,6 +4,6 @@ class bgWater extends MovableObject{
     height = 420;
     width = 1440;
     constructor(){
-        super().loadImage('../img/3. Background/Legacy/Layers/5. Water/L3.png');
+        super().loadImage('./img/3. Background/Legacy/Layers/5. Water/L3.png');
     }
 }

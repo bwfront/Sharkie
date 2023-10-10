@@ -3,7 +3,7 @@ class ThrowPoisen extends MovableObject {
 
 
   constructor(x, y) {
-    super().loadImage("../img/4. Marcadores/Poisen/Animada/1.png");
+    super().loadImage("./img/4. Marcadores/Poisen/Animada/1.png");
     this.x = x + 100;
     this.y = y + 80;
     this.height = 40;

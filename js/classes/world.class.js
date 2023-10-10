@@ -1,7 +1,7 @@
 class World {
   player = new Player();
   level;
-  background_audio = new Audio("audio/bgmusic.mp3");
+  background_audio = new Audio("./audio/bgmusic.mp3");
   canvas;
   ctx;
   keyboard;

@@ -35,7 +35,7 @@ function closeControl() {
         </a>
         <div id="heading">Sharkie</div>
         <div class="button">
-            <a onclick="mainMenuStart()"><img class="start-button" src="../img/6.Botones/Start/4.png"></a>
+            <a onclick="mainMenuStart()"><img class="start-button" src="./img/6.Botones/Start/4.png"></a>
         </div>
     `;
 }
@@ -68,7 +68,7 @@ function GameOverHTML() {
         </a>
         <div id="heading">Game Over</div>
         <div class="button">
-            <a onclick="mainMenuStart()"><img class="start-button" src="../img/6.Botones/Try again/Recurso 18.png"></a>
+            <a onclick="mainMenuStart()"><img class="start-button" src="./img/6.Botones/Try again/Recurso 18.png"></a>
         </div>
       `;
 }
@@ -80,7 +80,7 @@ function mainMenuFullscreen() {
 
 function menuVictory() {
   displayMenu();
-  let victory_sound = new Audio("../audio/victory.mp3");
+  let victory_sound = new Audio("./audio/victory.mp3");
   victory_sound.play();
   const menu = document.getElementById("mainmenu");
   menu.innerHTML = menuVictoryHTML();
@@ -97,9 +97,9 @@ function menuVictoryHTML() {
             />
         </svg>
     </a>
-    <div id="heading"><img class="victory" src="../img/6.Botones/Tittles/You win/Recurso 20.png"></div>
+    <div id="heading"><img class="victory" src="./img/6.Botones/Tittles/You win/Recurso 20.png"></div>
     <div class="button">
-        <a onclick="mainMenuStart()"><img class="start-button" src="../img/6.Botones/Start/4.png"></a>
+        <a onclick="mainMenuStart()"><img class="start-button" src="./img/6.Botones/Start/4.png"></a>
     </div>
 `;
 }
