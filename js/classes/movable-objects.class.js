@@ -3,7 +3,7 @@ class MovableObject extends DrawableObject{
   otherDirection = false;
   lastHit = 0;
   coin = 0;
-  poisen = 60;
+  poisen = 40;
   coin_sound = new Audio('audio/coin.wav');
   die_sound = new Audio('../audio/die.wav');
   i = 0;
@@ -16,9 +16,20 @@ class MovableObject extends DrawableObject{
         this.y <= obj.y + obj.height
     );
   }
+  isCollidingPlayer(obj) {
+    let yOffsetTop = 0.45 * this.height;
+    let xOffset = 0.1 * this.width; 
+    let yOffsetBottom = 0.1 * this.height;
+    return (
+        this.x + this.width - xOffset>= obj.x &&
+        this.x + xOffset <= obj.x + obj.width &&
+        this.y + this.height - yOffsetBottom >= obj.y &&
+        this.y + yOffsetTop <= obj.y + obj.height
+    );
+}
 
   hit() {
-    this.health -= 5;
+    this.health -= 10;
     if (this.health < 0) {
       this.health = 0;
       if(this.i < 15){

@@ -1,7 +1,7 @@
 class Endboss extends MovableObject{
-      height = 400;
-      width = 400;
-      y = 0;
+      height = 700;
+      width = 700;
+      y = -200;
       x = 1050;
       hitstaken = 0;
     IMAGES_SWIM = [
@@ -38,7 +38,7 @@ class Endboss extends MovableObject{
     }
 
     attack(){
-        this.speed = 3;
+        this.speed = 5;
         this.moveLeft();
     }
 

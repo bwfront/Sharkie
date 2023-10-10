@@ -39,9 +39,9 @@ class World {
       this.checkCollisionEndboss();
     }, 200);
   }
-  
+
   distanceEndbossPlayer(){
-    if(this.player.x > 600 && this.l == 0){
+    if(this.player.x > 500 && this.l == 0){
       this.l++;
       this.level.endboss[0].attack();
     }
@@ -51,10 +51,10 @@ class World {
       let bottle = this.throwPoisen[i];
       for (let j = this.level.endboss.length - 1; j >= 0; j--) {
         let boss = this.level.endboss[j];
-        if (bottle.isColliding(boss)) {
+        if (bottle.isCollidingPlayer(boss)) {
           boss.hitstaken++;
           this.level.endboss[j].hit();
-          if (boss.hitstaken >= 3) {
+          if (boss.hitstaken >= 5) {
             this.level.endboss.splice(j, 1);
             menuVictory();
           }
@@ -82,7 +82,7 @@ class World {
 
   checkCollisionEndboss() {
     this.level.endboss.forEach((endboss) => {
-      if (this.player.isColliding(endboss)) {
+      if (this.player.isCollidingPlayer(endboss)) {
         this.player.hit();
         this.statusBarHealth.setHealth(this.player.health);
       }
@@ -91,7 +91,7 @@ class World {
 
   checkCollision() {
     this.level.enemies.forEach((enemy) => {
-      if (this.player.isColliding(enemy)) {
+      if (this.player.isCollidingPlayer(enemy)) {
         this.player.hit();
         this.statusBarHealth.setHealth(this.player.health);
       }
@@ -112,7 +112,7 @@ class World {
   checkCollisionCoin() {
     for (let i = this.level.coins.length - 1; i >= 0; i--) {
       let coin = this.level.coins[i];
-      if (this.player.isColliding(coin)) {
+      if (this.player.isCollidingPlayer(coin)) {
         this.player.addCoin();
         this.statusBarCoin.setCoin(this.player.coin);
         this.level.coins.splice(i, 1);
@@ -124,7 +124,7 @@ class World {
     this.statusBarPoisen.setPoisen(this.player.poisen);
     for (let i = this.level.poisen.length - 1; i >= 0; i--) {
       let poisen = this.level.poisen[i];
-      if (this.player.isColliding(poisen)) {
+      if (this.player.isCollidingPlayer(poisen)) {
         this.player.addPoisen();
         this.level.poisen.splice(i, 1);
       }
@@ -165,7 +165,7 @@ class World {
       this.flipImage(obj);
     }
     obj.draw(this.ctx);
-    obj.drawRectangle(this.ctx);
+    //obj.drawRectangle(this.ctx);
 
     if (obj.otherDirection) {
       this.flipImageBack(obj);
