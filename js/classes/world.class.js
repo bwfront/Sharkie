@@ -37,7 +37,7 @@ class World {
       this.checkThrowPoisenHitsEndboss();
       this.distanceEndbossPlayer();
       this.checkCollisionEndboss();
-    }, 200);
+    }, 100);
   }
 
   distanceEndbossPlayer(){
@@ -99,7 +99,7 @@ class World {
   }
 
   checkPoisenThrow() {
-    if (this.keyboard.E) {
+    if (this.keyboard.SPACE) {
       if (this.player.poisen > 0) {
         let bottle = new ThrowPoisen(this.player.x, this.player.y);
         this.throwPoisen.push(bottle);
