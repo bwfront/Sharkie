@@ -1,7 +1,5 @@
 class ThrowPoisen extends MovableObject {
 
-
-
   constructor(x, y) {
     super().loadImage("./img/4. Marcadores/Poisen/Animada/1.png");
     this.x = x + 100;
@@ -13,7 +11,6 @@ class ThrowPoisen extends MovableObject {
 
   throw_sound = new Audio('audio/throw.wav');
   throw() {
-    this.throw_sound.play();
     this.startX = this.x;
     setInterval(() => {
       if (this.x - this.startX < 800) {

@@ -67,6 +67,7 @@ body{
     display: flex;
     justify-content: flex-end;
     margin: 20px;
+    margin-left: 0px !important;
     filter: invert();
 }
 .icon-img{
@@ -111,7 +112,10 @@ canvas{
     box-shadow: 0px 0px 37px 7px rgb(255, 255, 255);
     display: block;
 }
-
+.icon-div{
+    display: flex;
+    justify-content: flex-end;
+}
 /* Smartphone */
 
 @media only screen and (max-width: 720px){

@@ -101,8 +101,11 @@ class World {
     if (this.keyboard.SPACE) {
       if (this.player.poisen > 0) {
         let bottle = new ThrowPoisen(this.player.x, this.player.y);
-        this.throwPoisen.push(bottle);
+        if(!isMutetd){
+          bottle.throw_sound.play();
 
+        }
+        this.throwPoisen.push(bottle);
         this.player.poisen -= 20;
       }
     }

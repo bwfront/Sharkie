@@ -21,6 +21,7 @@ function toggleFullscreen() {
   }
 }
 
+
 window.addEventListener("keydown", (e) => {
   if (e.code === "KeyW") {
     keyboard.UP = true;
