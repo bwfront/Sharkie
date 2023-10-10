@@ -1,5 +1,4 @@
 class Poisen extends MovableObject{
-
     height = 40;
     width = 40;
   
@@ -19,7 +18,7 @@ class Poisen extends MovableObject{
       super().loadImage(
         "../img/4. Marcadores/Poisen/Animada/1.png"
       );
-      this.x = 200 + Math.random() * 800;
+      this.x = 200 + Math.random() * 600;
       this.y = 0 + Math.random() * 400;
       
         this.loadImages(this.IMAGES_IDLE);

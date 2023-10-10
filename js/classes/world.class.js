@@ -33,7 +33,27 @@ class World {
       this.checkCollisionPoisen();
       this.checkPoisenThrow();
       this.checkThrowPoisenHitsEnemy();
+      this.checkThrowPoisenHitsEndboss();
     }, 200);
+  }
+
+  checkThrowPoisenHitsEndboss() {
+    for (let i = this.throwPoisen.length - 1; i >= 0; i--) {
+      let bottle = this.throwPoisen[i];
+      for (let j = this.level.endboss.length - 1; j >= 0; j--) {
+        let boss = this.level.endboss[j];
+        if (bottle.isColliding(boss)) {
+          boss.hitstaken++;
+          this.level.endboss[j].hit();
+          if (boss.hitstaken >= 3) {
+            this.level.endboss.splice(j, 1);
+            menuVictory();
+          }
+          this.throwPoisen.splice(i, 1);
+          break;
+        }
+      }
+    }
   }
 
   checkThrowPoisenHitsEnemy() {
@@ -63,14 +83,8 @@ class World {
       if (this.player.poisen > 0) {
         let bottle = new ThrowPoisen(this.player.x, this.player.y);
         this.throwPoisen.push(bottle);
-        let checkThrow = true;
+
         this.player.poisen -= 20;
-        if (this.throwPoisen && checkThrow) {
-          checkThrow = false;
-          setInterval(() => {
-            this.throwPoisen.splice(0);
-          }, 700);
-        }
       }
     }
   }
@@ -103,6 +117,7 @@ class World {
 
     this.addToMapArray(this.level.backgroundObjects);
     this.addToMapArray(this.level.enemies);
+    this.addToMapArray(this.level.endboss);
     this.addToMapArray(this.level.coins);
     this.addToMapArray(this.level.poisen);
     this.addToMapArray(this.throwPoisen);

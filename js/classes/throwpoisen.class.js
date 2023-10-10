@@ -16,10 +16,8 @@ class ThrowPoisen extends MovableObject {
     this.throw_sound.play();
     this.startX = this.x;
     setInterval(() => {
-      if (this.x - this.startX < 150) {
         this.x += 2;
-        this.y += 0.5;
-      }
+        this.y += 0.2;
     }, 1000 / 150);
   }
 }

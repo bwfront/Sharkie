@@ -73,3 +73,9 @@ function mainMenuFullscreen() {
   const canvas = document.getElementById("canvas");
   canvas.style.display = "unset";
 }
+
+
+function menuVictory(){
+    let victory_sound = new Audio('../audio/victory.mp3');
+    victory_sound.play();
+}

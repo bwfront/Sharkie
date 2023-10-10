@@ -3,6 +3,7 @@ class Endboss extends MovableObject{
       width = 400;
       y = 0;
       x = 1050;
+      hitstaken = 0;
     IMAGES_SWIM = [
         '../img/2.Enemy/3 Final Enemy/2.floating/1.png',
         '../img/2.Enemy/3 Final Enemy/2.floating/2.png',
@@ -18,18 +19,46 @@ class Endboss extends MovableObject{
         '../img/2.Enemy/3 Final Enemy/2.floating/12.png',
         '../img/2.Enemy/3 Final Enemy/2.floating/13.png',
     ];
-
+    IMAGES_HIT = [
+        '../img/2.Enemy/3 Final Enemy/Hurt/1.png',
+        '../img/2.Enemy/3 Final Enemy/Hurt/2.png',
+        '../img/2.Enemy/3 Final Enemy/Hurt/3.png',
+        '../img/2.Enemy/3 Final Enemy/Hurt/4.png',
+    ];
+    endbosshit_audio = new Audio('../audio/endbosshit.mp3');
     constructor(){
         super().loadImage(
             "../img/2.Enemy/3 Final Enemy/2.floating/1.png"
           );
         this.loadImages(this.IMAGES_SWIM);
+        this.loadImages(this.IMAGES_HIT);
         this.animate();
 
     }
-    animate(){
-        setInterval(() =>{
-            this.playAnimation(this.IMAGES_SWIM);
-        },1000 / 7);
+
+    attack(){
+        //attack logic
+    }
+
+    hit() {
+        this.hitAnimationPlaying = true;
+        this.hitAnimation();
+        this.endbosshit_audio.play();
+    }
+
+    hitAnimation() {
+        this.playAnimation(this.IMAGES_HIT);
+        let animationDuration = this.IMAGES_HIT.length * (1000 / 7);
+        setTimeout(() => {
+            this.hitAnimationPlaying = false;
+        }, animationDuration);
+    }
+
+    animate() {
+        setInterval(() => {
+            if (!this.hitAnimationPlaying) {
+                this.playAnimation(this.IMAGES_SWIM);
+            }
+        }, 1000 / 7);
     }
 }
