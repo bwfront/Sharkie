@@ -82,6 +82,9 @@ body{
 .gameover{
     margin-top: 400px;
 }
+.victory{
+    width: 300px;
+}
 canvas{
     background-color: #000000;
     box-shadow: 0px 0px 37px 7px rgba(243, 133, 255, 0.6);
