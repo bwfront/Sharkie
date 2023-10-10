@@ -122,10 +122,22 @@ canvas{
     canvas, #mainmenu{
         width: 100vw;
     }
+    .fullscreen{
+        display: none;
+    }
+    #controls{
+        display: none;
+    }
 }
 @media only screen and (max-height: 480px){
     canvas, #mainmenu{
         height: 100vh;
+    }
+    .fullscreen{
+        display: none;
+    }
+    #controls{
+        display: none;
     }
     .start-button{
         margin-top: 200px !important;

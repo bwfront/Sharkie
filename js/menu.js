@@ -7,10 +7,10 @@ function mainMenuStart() {
   checkMuted();
 }
 
-function checkMuted(){
-    if(isMutetd){
-        muteAllAudio();
-    }
+function checkMuted() {
+  if (isMutetd) {
+    muteAllAudio();
+  }
 }
 function displayMenu() {
   canvas = document.getElementById("canvas");
@@ -21,7 +21,7 @@ function displayMenu() {
 }
 
 function GameOverMenu() {
-  document.exitFullscreen();
+  exitFullscreenCheck();
   displayMenu();
   GameOverHTML();
 }
@@ -54,7 +54,7 @@ function closeControl() {
         <a onclick="mainMenuStart()"><img class="start-button" src="./img/6.Botones/Start/4.png"></a>
     </div>
     `;
-    readAudio();
+  readAudio();
 }
 
 function openControl() {
@@ -67,14 +67,14 @@ function openControl() {
                 d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
             </svg>
         </a>
+    </div>
         <div id="heading">Control</div>
         <div class="control-con">
             <div class="control-content"><img class="control-img" src="img/6.Botones/Key/arrow keys.png">W A S D / SWIM</div>
             <div class="control-content"><img class="control-img space" src="img/6.Botones/Key/Space Bar key.png">Shoot</div>
         </div>
-    </div>
     `;
-    readAudio();
+  readAudio();
 }
 
 function GameOverHTML() {
@@ -101,16 +101,17 @@ function GameOverHTML() {
         <a onclick="mainMenuStart()"><img class="start-button" src="./img/6.Botones/Try again/Recurso 18.png"></a>
     </div>
       `;
-      readAudio();
+  readAudio();
 }
 
 function menuVictory() {
-  document.exitFullscreen();
+  exitFullscreenCheck();
   displayMenu();
   let victory_sound = new Audio("./audio/victory.mp3");
   victory_sound.play();
   const menu = document.getElementById("mainmenu");
   menu.innerHTML = menuVictoryHTML();
+  readAudio();
 }
 
 function menuVictoryHTML() {
@@ -140,6 +141,9 @@ function menuVictoryHTML() {
         <a onclick="mainMenuStart()"><img class="start-button" src="./img/6.Botones/Start/4.png"></a>
     </div>
 `;
-readAudio();
 }
-
+function exitFullscreenCheck() {
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  }
+}
