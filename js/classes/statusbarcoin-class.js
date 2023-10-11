@@ -22,8 +22,10 @@ class StatusBarCoin extends DrawableObject {
 
   setCoin(playercoin) {
     this.playercoin = playercoin;
-    let path = this.IMAGES[this.getCoinIndex()];
-    this.img = this.imagesCache[path];
+    this.setStatus();
+  }
+  getIndex() {
+    return this.getCoinIndex();
   }
 
   getCoinIndex() {

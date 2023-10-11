@@ -1,11 +1,11 @@
 class StatusBarPoisen extends DrawableObject {
-    IMAGES = [
-    "./img/4. Marcadores/orange/0_ copia.png",
-    "./img/4. Marcadores/orange/20_ copia.png",
-    "./img/4. Marcadores/orange/40_ copia.png",
-    "./img/4. Marcadores/orange/60_ copia.png",
-    "./img/4. Marcadores/orange/80_ copia.png",
-    "./img/4. Marcadores/orange/100_ copia.png"
+  IMAGES = [
+    "../img/4. Marcadores/orange/0_ copia.png",
+    "../img/4. Marcadores/orange/20_ copia.png",
+    "../img/4. Marcadores/orange/40_ copia.png",
+    "../img/4. Marcadores/orange/60_ copia.png",
+    "../img/4. Marcadores/orange/80_ copia.png",
+    "../img/4. Marcadores/orange/100_ copia.png",
   ];
 
   playerPoisen = 0;
@@ -22,12 +22,14 @@ class StatusBarPoisen extends DrawableObject {
 
   setPoisen(playerPoisen) {
     this.playerPoisen = playerPoisen;
-    let path = this.IMAGES[this.getPoisenIndex()];
-    this.img = this.imagesCache[path];
+    this.setStatus();
+  }
+  getIndex() {
+    return this.getPoisenIndex();
   }
 
   getPoisenIndex() {
-    if (this.playerPoisen >= 100) {
+    if (this.playerPoisen > 100) {
       return 5;
     } else if (this.playerPoisen >= 80) {
       return 4;

@@ -23,9 +23,15 @@ class DrawableObject {
       this.imagesCache[path] = img;
     });
   }
+  setStatus() {
+    let path = this.IMAGES[this.getIndex()];
+    this.img = this.imagesCache[path];
+  }
+  getIndex() {
+    return 0;
+  }
 
   drawRectangle(ctx) {
-    //Rectangle Red
     if (
       this instanceof Player ||
       this instanceof EnemyFish ||

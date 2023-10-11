@@ -9,10 +9,9 @@ class StatusBarHealth extends DrawableObject {
   ];
 
   playerhealth = 100;
-
   constructor() {
     super();
-    this.loadImages(this.IMAGES); 
+    this.loadImages(this.IMAGES);
     this.x = 10;
     this.y = 0;
     this.height = 60;
@@ -20,10 +19,12 @@ class StatusBarHealth extends DrawableObject {
     this.setHealth(100);
   }
 
-  setHealth(playerhealth){
-    this.playerhealth = playerhealth;
-    let path = this.IMAGES[this.getHealthIndex()];
-    this.img = this.imagesCache[path];
+  setHealth(playerhealth) {
+    this.playerPoisen = playerhealth;
+    this.setStatus();
+  }
+  getIndex() {
+    return this.getHealthIndex();
   }
 
   getHealthIndex() {
@@ -37,10 +38,10 @@ class StatusBarHealth extends DrawableObject {
       return 3;
     } else if (this.playerhealth > 0) {
       return 4;
-    } else if (this.playerhealth = 0){
+    } else if ((this.playerhealth = 0)) {
       return 5;
-    }else{
-        return 5;
+    } else {
+      return 5;
     }
   }
 }

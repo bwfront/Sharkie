@@ -54,54 +54,29 @@ class Player extends MovableObject {
 
   world;
 
-  swim_sound = new Audio('./audio/sharkswim.mp3');
-  
+  swim_sound = new Audio("./audio/sharkswim.mp3");
+
   constructor() {
-    super().loadImage("");
+    super().loadImage("./img/1.Sharkie/3.Swim/1.png");
     this.animate();
+    this.movingPlayer();
     this.swim_sound.volume = 0.5;
   }
 
-  animate() {
-    //SWIM
-    setInterval(() => {
-      if (!this.isDead()) {
-        if (this.world.keyboard.RIGHT) {
-          if (this.x < 760) {
-            this.x += this.speed;
-            this.otherDirection = false;
-            this.world.camera_x += -this.speed;
-          }
-        }
-        if (this.world.keyboard.LEFT) {
-          if (this.x > 40) {
-            this.x -= this.speed;
-            this.otherDirection = true;
-            this.world.camera_x += this.speed;
-          }
-        }
-        if (this.world.keyboard.UP) {
-          if (this.y > -80) {
-            this.y -= this.speed;
-          }
-        }
-        if (this.world.keyboard.DOWN) {
-          if (this.y < 280) {
-            this.y += this.speed;
-          }
-        }
-      }
-    }, 1000 / 60);
-    //SWIM Animation
+  playerloadImage() {
     this.loadImages(this.IMAGES_SWIM);
     this.loadImages(this.IMAGES_IDLE);
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
+  }
+
+  animate() {
+    this.playerloadImage();
     setInterval(() => {
       if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
         this.swim_sound.pause();
-      }else if(this.isHurt()){
+      } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
       } else if (
         this.world.keyboard.RIGHT ||
@@ -116,5 +91,52 @@ class Player extends MovableObject {
         this.playAnimation(this.IMAGES_IDLE);
       }
     }, 1000 / 7);
+  }
+
+  movingPlayer() {
+    setInterval(() => {
+      if (!this.isDead()) {
+        if (this.world.keyboard.RIGHT) {
+          this.moveingRight();
+        }
+        if (this.world.keyboard.LEFT) {
+          this.moveingLeft();
+        }
+        if (this.world.keyboard.UP) {
+          this.moveingUP();
+        }
+        if (this.world.keyboard.DOWN) {
+          this.moveingDown();
+        }
+      }
+    }, 1000 / 60);
+  }
+
+  moveingRight() {
+    if (this.x < 760) {
+      this.x += this.speed;
+      this.otherDirection = false;
+      this.world.camera_x += -this.speed;
+    }
+  }
+
+  moveingLeft() {
+    if (this.x > 40) {
+      this.x -= this.speed;
+      this.otherDirection = true;
+      this.world.camera_x += this.speed;
+    }
+  }
+
+  moveingUP() {
+    if (this.y > -80) {
+      this.y -= this.speed + 0.5;
+    }
+  }
+
+  moveingDown() {
+    if (this.y < 280) {
+      this.y += this.speed + 0.5;
+    }
   }
 }

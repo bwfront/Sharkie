@@ -1,189 +1,206 @@
 @font-face {
-    font-family: "Luckyiest Guy";
-    src: url('fonts/Luckiest_Guy/LuckiestGuy-Regular.ttf') format('woff2'), /* Pfad zur Schriftartdatei. Das `format` ist optional, aber es hilft Browsern zu wissen, welches Dateiformat sie herunterladen. */
+  font-family: "Luckyiest Guy";
+  src: url("fonts/Luckiest_Guy/LuckiestGuy-Regular.ttf") format("woff2"); /* Pfad zur Schriftartdatei. Das `format` ist optional, aber es hilft Browsern zu wissen, welches Dateiformat sie herunterladen. */
 }
 
-body{
-    margin: 0;
+body {
+  margin: 0;
+  height: 100vh;
+  max-height: 100vh;
+  font-family: "Luckyiest Guy";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url("./img/3. Background/Legacy/Layers/5. Water/L3.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.fullscreen {
+  font-size: 18px;
+  margin-top: 415px;
+  color: #ffffff;
+  z-index: 2;
+  cursor: pointer;
+  padding-bottom: 5px !important;
+  padding: 10px;
+  background-color: #bf077f;
+  border-radius: 10px;
+  border: solid 2px #ffffff;
+  position: fixed;
+}
+.fullscreen:hover {
+  box-shadow: 0px 0px 37px 7px rgba(243, 133, 255, 0.6);
+}
+#mainmenu {
+  z-index: 3;
+  height: 480px;
+  width: 720px;
+  background-image: url("./img/3. Background/Mesa de trabajo 1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 0px 0px 37px 7px rgb(255, 255, 255);
+}
+#heading {
+  text-align: center;
+  margin-bottom: -50px;
+  font-size: 60px;
+  color: #ffffff;
+  text-shadow: 3px 3px 10px rgb(197, 17, 209);
+}
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.start-button {
+  cursor: pointer;
+  height: 70px;
+  margin-top: 290px;
+}
+.start-button:hover {
+  box-shadow: 0px 0px 37px 7px rgba(243, 133, 255, 0.6);
+  border-radius: 20px;
+}
+.icon {
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px;
+  margin-left: 0px !important;
+  filter: invert();
+}
+.icon-img {
+  cursor: pointer;
+  background-color: rgb(149, 210, 28);
+  border-radius: 26px;
+  border: solid 2px #000000;
+  padding: 5px;
+  width: 40px;
+}
+.icon-img:hover {
+  box-shadow: 0px 0px 10px 7px rgba(165, 152, 0, 0.6);
+}
+.control-con {
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 60px;
+}
+.control-img {
+  height: 120px;
+  margin-right: 40px;
+}
+.space {
+  height: 60px;
+}
+.control-content {
+  margin: 40px;
+  font-size: 35px;
+  display: flex;
+  align-items: center;
+}
+.gameover {
+  margin-top: 400px;
+}
+.victory {
+  width: 300px;
+}
+canvas {
+  background-color: #000000;
+  box-shadow: 0px 0px 37px 7px rgb(255, 255, 255);
+  display: block;
+}
+.icon-div {
+  display: flex;
+  justify-content: flex-end;
+}
+.mobile-hud {
+  display: none !important;
+  margin-top: -130px;
+  z-index: 1;
+  width: 600px;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.hud-swim {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.hud-swim div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+button {
+  border-radius: 5px;
+  margin: 3px;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 25px;
+  padding: 5px;
+  border: solid #ffffff;
+  background-color: #bf077f;
+  touch-action: none;
+}
+button:hover {
+  background-color: #eca8d4;
+}
+#btn-up,
+#btn-down {
+  padding: 5px 12px;
+}
+
+#btn-shoot {
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 1000px) {
+  .mobile-hud {
+    display: flex !important;
+  }
+}
+@media screen and (max-height: 700px) {
+  .mobile-hud {
+    display: flex !important;
+  }
+}
+@media only screen and (max-width: 720px) {
+  canvas,
+  #mainmenu,
+  .mobile-hud {
+    width: 100vw;
+  }
+  .fullscreen {
+    display: none !important;
+  }
+  #controls {
+    display: none;
+  }
+}
+@media only screen and (max-height: 480px) {
+  body {
+    justify-content: unset;
+  }
+  canvas,
+  #mainmenu {
     height: 100vh;
-    max-height: 100vh;
-    font-family: "Luckyiest Guy";
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-image: url('./img/3. Background/Legacy/Layers/5. Water/L3.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-.fullscreen{
-    font-size: 18px;
-    margin-top: 415px;
-    color: #ffffff;
-    z-index: 1;
-    cursor: pointer;
-    padding-bottom: 5px !important;
-    padding: 10px;
-    background-color: #bf077f;
-    border-radius: 10px;
-    border: solid 2px #ffffff;
-    position: fixed;
-}
-.fullscreen:hover{
-    box-shadow: 0px 0px 37px 7px rgba(243, 133, 255, 0.6);
-}
-#mainmenu{
-    z-index: 2;
-    height: 480px;
-    width: 720px;
-    background-image: url('./img/3. Background/Mesa de trabajo 1.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    box-shadow: 0px 0px 37px 7px rgb(255, 255, 255);
-}
-#heading{
-    text-align: center;
-    margin-bottom: -50px;
-    font-size: 60px;
-    color: #ffffff;
-    text-shadow: 3px 3px 10px rgb(197, 17, 209);
-}
-.button{
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-}
-.start-button{
-    cursor: pointer;
-    height: 70px;
-    margin-top: 310px;
-}
-.start-button:hover{
-    box-shadow: 0px 0px 37px 7px rgba(243, 133, 255, 0.6);
-    border-radius: 20px;
+  }
 
+  .fullscreen {
+    display: none !important;
+  }
+  #controls {
+    display: none;
+  }
+  .start-button {
+    margin-top: 200px !important;
+  }
 }
-.icon{
-    display: flex;
-    justify-content: flex-end;
-    margin: 20px;
-    margin-left: 0px !important;
-    filter: invert();
-}
-.icon-img{
-    cursor: pointer;
-    background-color: rgb(149, 210, 28);
-    border-radius: 26px;
-    border: solid 2px #000000;
-    padding: 5px;
-    width: 40px;
-}
-.icon-img:hover{
-    box-shadow: 0px 0px 10px 7px rgba(165, 152, 0, 0.6);
-}
-.control-con{
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 60px;
-}
-.control-img{
-    height: 120px;
-    margin-right: 40px;
-}
-.space{
-    height: 60px;
-}
-.control-content{
-    margin: 40px;
-    font-size: 35px;
-    display: flex;
-    align-items: center;
-}
-.gameover{
-    margin-top: 400px;
-}
-.victory{
-    width: 300px;
-}
-canvas{
-    background-color: #000000;
-    box-shadow: 0px 0px 37px 7px rgb(255, 255, 255);
-    display: block;
-}
-.icon-div{
-    display: flex;
-    justify-content: flex-end;
-}
-.mobile-hud{
-    margin-top: -130px;
-    z-index: 1;
-    width: 600px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-}
-.hud-swim{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-}
-.hud-swim div{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-button{
-    border-radius: 5px;
-    margin: 3px;
-    cursor: pointer;
-    color: #ffffff;
-    font-size: 25px;
-    padding: 5px;
-    border: solid #ffffff;
-    background-color: #bf077f;
-}
-button:hover{
-    background-color: #eca8d4;
-}
-#btn-up, #btn-down{
-   padding: 5px 12px;
-}
-
-#btn-shoot{
-    border-radius: 5px;
-}
-/* Smartphone */
-
-@media only screen and (max-width: 720px){
-    canvas, #mainmenu, .mobile-hud{
-        width: 100vw;
-    }
-    .fullscreen{
-        display: none;
-    }
-    #controls{
-        display: none;
-    }
-}
-@media only screen and (max-height: 480px){
-    canvas, #mainmenu{
-        height: 100vh;
-    }
-    .fullscreen{
-        display: none;
-    }
-    #controls{
-        display: none;
-    }
-    .start-button{
-        margin-top: 200px !important;
-    }
-}
-@media only screen and (max-height: 480px){
-    .start-button{
-        margin-top: 150px !important;
-    }
+@media only screen and (max-height: 480px) {
+  .start-button {
+    margin-top: 150px !important;
+  }
 }

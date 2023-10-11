@@ -73,7 +73,7 @@ class MovableObject extends DrawableObject {
     this.img = this.imagesCache[path];
     this.currentImage++;
   }
-  
+
   moveLeft() {
     setInterval(() => {
       this.x -= this.speed;

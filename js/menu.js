@@ -1,6 +1,10 @@
 function mainMenuStart() {
   canvas = document.getElementById("canvas");
   menu = document.getElementById("mainmenu");
+  hud = document.getElementById("mobile-hud");
+  fullbtm = document.getElementById("fullbtn");
+  fullbtm.style.display = "unset";
+  hud.style.display = "flex";
   menu.style.display = "none";
   canvas.style.display = "unset";
   init();
@@ -15,6 +19,10 @@ function checkMuted() {
 function displayMenu() {
   canvas = document.getElementById("canvas");
   menu = document.getElementById("mainmenu");
+  hud = document.getElementById("mobile-hud");
+  fullbtm = document.getElementById("fullbtn");
+  fullbtm.style.display = "none";
+  hud.style.display = "none";
   menu.style.display = "unset";
   canvas.style.display = "none";
   world[0].background_audio.pause();
@@ -74,7 +82,6 @@ function openControl() {
             <div class="control-content"><img class="control-img space" src="img/6.Botones/Key/Space Bar key.png">Shoot</div>
         </div>
     `;
-  readAudio();
 }
 
 function GameOverHTML() {

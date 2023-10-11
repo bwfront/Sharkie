@@ -11,6 +11,7 @@ class World {
   statusBarCoin = new StatusBarCoin();
   statusBarPoisen = new StatusBarPoisen();
   throwPoisen = [];
+
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -26,6 +27,7 @@ class World {
   setWorld() {
     this.player.world = this;
   }
+
   run() {
     setInterval(() => {
       this.checkCollision();
@@ -39,28 +41,33 @@ class World {
     }, 100);
   }
 
-  distanceEndbossPlayer(){
-    if(this.player.x > 500 && this.l == 0){
+  distanceEndbossPlayer() {
+    if (this.player.x > 500 && this.l == 0) {
       this.l++;
       this.level.endboss[0].attack();
     }
   }
+
   checkThrowPoisenHitsEndboss() {
     for (let i = this.throwPoisen.length - 1; i >= 0; i--) {
       let bottle = this.throwPoisen[i];
       for (let j = this.level.endboss.length - 1; j >= 0; j--) {
         let boss = this.level.endboss[j];
         if (bottle.isCollidingPlayer(boss)) {
-          boss.hitstaken++;
-          this.level.endboss[j].hit();
-          if (boss.hitstaken >= 5) {
-            this.level.endboss.splice(j, 1);
-            menuVictory();
-          }
+          this.hitEndboss(boss, j);
           this.throwPoisen.splice(i, 1);
           break;
         }
       }
+    }
+  }
+
+  hitEndboss(boss, j) {
+    boss.hitstaken++;
+    this.level.endboss[j].hit();
+    if (boss.hitstaken >= 5) {
+      this.level.endboss.splice(j, 1);
+      menuVictory();
     }
   }
 
@@ -77,7 +84,6 @@ class World {
       }
     }
   }
-
 
   checkCollisionEndboss() {
     this.level.endboss.forEach((endboss) => {
@@ -101,9 +107,8 @@ class World {
     if (this.keyboard.SPACE) {
       if (this.player.poisen > 0) {
         let bottle = new ThrowPoisen(this.player.x, this.player.y);
-        if(!isMutetd){
+        if (!isMutetd) {
           bottle.throw_sound.play();
-
         }
         this.throwPoisen.push(bottle);
         this.player.poisen -= 20;
@@ -137,18 +142,26 @@ class World {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
 
-    this.addToMapArray(this.level.backgroundObjects);
-    this.addToMapArray(this.level.enemies);
-    this.addToMapArray(this.level.endboss);
-    this.addToMapArray(this.level.coins);
-    this.addToMapArray(this.level.poisen);
-    this.addToMapArray(this.throwPoisen);
+    this.drawArrayFun();
 
     let self = this;
     requestAnimationFrame(function () {
       self.draw();
     });
 
+    this.drawMapFun();
+  }
+
+  drawArrayFun() {
+    this.addToMapArray(this.level.backgroundObjects);
+    this.addToMapArray(this.level.enemies);
+    this.addToMapArray(this.level.endboss);
+    this.addToMapArray(this.level.coins);
+    this.addToMapArray(this.level.poisen);
+    this.addToMapArray(this.throwPoisen);
+  }
+
+  drawMapFun() {
     this.addToMap(this.player);
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusBarHealth);
@@ -173,12 +186,14 @@ class World {
       this.flipImageBack(obj);
     }
   }
+
   flipImage(obj) {
     this.ctx.save();
     this.ctx.translate(obj.width, 0);
     this.ctx.scale(-1, 1);
     obj.x = obj.x * -1;
   }
+
   flipImageBack(obj) {
     obj.x = obj.x * -1;
     this.ctx.restore();
