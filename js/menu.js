@@ -30,7 +30,7 @@ function closeControl() {
   const menu = document.getElementById("mainmenu");
   menu.innerHTML = `
     <div class="icon-div">
-        <a class="icon" onclick="openControl()">
+        <a class="icon" id="controls" onclick="openControl()">
             <svg class="icon-img" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
                 <path
                     d="M160-200q-33 0-56.5-23.5T80-280v-400q0-33 23.5-56.5T160-760h640q33 0 
@@ -61,7 +61,7 @@ function openControl() {
   const menu = document.getElementById("mainmenu");
   menu.innerHTML = `
     <div class="icon-div">
-        <a class="icon" onclick="closeControl()">
+        <a class="icon" id="controls" onclick="closeControl()">
             <svg class="icon-img" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
                 <path
                 d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
@@ -81,7 +81,7 @@ function GameOverHTML() {
   const menu = document.getElementById("mainmenu");
   menu.innerHTML = `
     <div class="icon-div">
-        <a class="icon" onclick="closeControl()">
+        <a class="icon" id="controls" onclick="closeControl()">
             <svg class="icon-img" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
                 <path
                 d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />

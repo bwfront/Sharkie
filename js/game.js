@@ -13,14 +13,15 @@ function init() {
 
 function toggleFullscreen() {
   if (!document.fullscreenElement) {
-      canvas.requestFullscreen().catch(err => {
-          alert(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
-      });
+    canvas.requestFullscreen().catch((err) => {
+      alert(
+        `Error attempting to enable fullscreen mode: ${err.message} (${err.name})`
+      );
+    });
   } else {
-      document.exitFullscreen();
+    document.exitFullscreen();
   }
 }
-
 
 window.addEventListener("keydown", (e) => {
   if (e.code === "KeyW") {
@@ -56,4 +57,52 @@ window.addEventListener("keyup", (e) => {
   if (e.code === "Space") {
     keyboard.SPACE = false;
   }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("btn-up").addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    keyboard.UP = true;
+  });
+
+  document.getElementById("btn-up").addEventListener("touchend", (e) => {
+    e.preventDefault();
+    keyboard.UP = false;
+  });
+  document.getElementById("btn-down").addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    keyboard.DOWN = true;
+  });
+
+  document.getElementById("btn-down").addEventListener("touchend", (e) => {
+    e.preventDefault();
+    keyboard.DOWN = false;
+  });
+  document.getElementById("btn-left").addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    keyboard.LEFT = true;
+  });
+
+  document.getElementById("btn-left").addEventListener("touchend", (e) => {
+    e.preventDefault();
+    keyboard.LEFT = false;
+  });
+  document.getElementById("btn-right").addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    keyboard.RIGHT = true;
+  });
+
+  document.getElementById("btn-right").addEventListener("touchend", (e) => {
+    e.preventDefault();
+    keyboard.RIGHT = false;
+  });
+  document.getElementById("btn-shoot").addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    keyboard.SPACE = true;
+  });
+
+  document.getElementById("btn-shoot").addEventListener("touchend", (e) => {
+    e.preventDefault();
+    keyboard.SPACE = false;
+  });
 });

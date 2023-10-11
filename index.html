@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" translate="no">
 
 <head>
     <meta charset="UTF-8">
@@ -25,7 +25,7 @@
     <script src="js/classes/endboss.class.js"></script>
     <script src="js/classes/enemy-fish.class.js"></script>
     <script src="js/classes/enemy-jelly.class.js"></script>
-    <script src="js/classes/coins.classes.js"></script>
+    <script src="js/classes/coins.class.js"></script>
     <script src="js/classes/poisen.class.js"></script>
     <script src="js/classes/keyboard.class.js"></script>
     <script src="js/classes/level.class.js"></script>
@@ -56,9 +56,22 @@
             <a onclick="mainMenuStart()"><img class="start-button" src="./img/6.Botones/Start/4.png"></a>
         </div>
     </div>
-    <div class="fullscreen" onclick="toggleFullscreen()">Fullscreen</div>
     <canvas id="canvas" width="720" height="480" style="display: none;"></canvas>
     <div id="gameovermenu"></div>
+    <div class="fullscreen" onclick="toggleFullscreen()">Fullscreen</div>
+    <div class="mobile-hud">
+        <div class="hud-shoot">
+            <button id="btn-shoot">Shoot</button>
+        </div>
+        <div class="hud-swim">
+            <button id="btn-up">↑</button>
+            <div>
+                <button id="btn-left">←</button>
+                <button id="btn-down">↓</button>
+                <button id="btn-right">→</button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
