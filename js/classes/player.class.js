@@ -5,6 +5,10 @@ class Player extends MovableObject {
   width = 160;
   speed = 4;
   health = 100;
+  bubbleAnimationPlaying = false;
+  lastBubbleAnimationTime = 0;
+  bubbleAnimationCooldown = 1000; // 1 second cooldown
+  attack = true;
   IMAGES_SWIM = [
     "./img/1.Sharkie/3.Swim/1.png",
     "./img/1.Sharkie/3.Swim/3.png",
@@ -51,6 +55,14 @@ class Player extends MovableObject {
     "./img/1.Sharkie/5.Hurt/2.Electric shock/2.png",
     "./img/1.Sharkie/5.Hurt/2.Electric shock/3.png",
   ];
+  IMAGES_BUBBLE =
+  [
+    "./img/1.Sharkie/Bubble trap/op1 (with bubble formation)/3.png",
+    "./img/1.Sharkie/Bubble trap/op1 (with bubble formation)/5.png",
+    "./img/1.Sharkie/Bubble trap/op1 (with bubble formation)/6.png",
+    "./img/1.Sharkie/Bubble trap/op1 (with bubble formation)/7.png",
+    "./img/1.Sharkie/Bubble trap/op1 (with bubble formation)/8.png",
+  ]
 
   world;
 
@@ -66,16 +78,21 @@ class Player extends MovableObject {
   playerloadImage() {
     this.loadImages(this.IMAGES_SWIM);
     this.loadImages(this.IMAGES_IDLE);
+    this.loadImages(this.IMAGES_BUBBLE);
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
   }
 
   animate() {
     this.playerloadImage();
+    let startBubble = false;
+
     setInterval(() => {
       if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
         this.swim_sound.pause();
+      } else if (this.world.keyboard.E && this.attack) {
+        this.attackCharacter()  // Reset flag after starting animation
       } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
       } else if (
@@ -90,8 +107,28 @@ class Player extends MovableObject {
         this.swim_sound.pause();
         this.playAnimation(this.IMAGES_IDLE);
       }
+
+      if (this.world.keyboard.E) {
+        startBubble = true;  // Set flag to start bubble animation on next iteration
+        this.world.keyboard.E = false;  // Reset E key state so we don't continuously trigger
+      }
     }, 1000 / 7);
-  }
+}
+
+
+attackCharacter() {
+  this.timerForAnimation();
+  this.playAnimation(this.IMAGES_BUBBLE);  
+  //this.bubble_sound.play();
+}
+timerForAnimation() {
+  this.attack = false;
+  setTimeout(() => {
+      this.attack = true;   
+  }, 50);
+}
+
+
 
   movingPlayer() {
     setInterval(() => {

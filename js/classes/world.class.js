@@ -11,6 +11,11 @@ class World {
   statusBarCoin = new StatusBarCoin();
   statusBarPoisen = new StatusBarPoisen();
   throwPoisen = [];
+  throwBubble = [];
+  lastShotTime = 0;
+  shotCooldown = 900; // 0.8seconds in milliseconds
+  lastPoisenThrowTime = 0;
+  poisenThrowCooldown = 700; // 0.7seconds in milliseconds
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -34,11 +39,13 @@ class World {
       this.checkCollisionCoin();
       this.checkCollisionPoisen();
       this.checkPoisenThrow();
+      this.checkBubbleThrow();
       this.checkThrowPoisenHitsEnemy();
+      this.checkThrowBubbleHitsEnemy();
       this.checkThrowPoisenHitsEndboss();
       this.distanceEndbossPlayer();
       this.checkCollisionEndboss();
-    }, 200);
+    }, 100);
   }
 
   distanceEndbossPlayer() {
@@ -62,6 +69,19 @@ class World {
     }
   }
 
+  checkThrowBubbleHitsEnemy() {
+    for (let i = this.throwBubble.length - 1; i >= 0; i--) {
+        let bubble = this.throwBubble[i];
+        for (let j = this.level.enemies.length - 1; j >= 0; j--) {
+            let enemy = this.level.enemies[j];
+            if (bubble.isColliding(enemy)) { 
+                this.level.enemies.splice(j, 1);
+                this.throwBubble.splice(i, 1);
+                break;
+            }
+        }
+    }
+}
   hitEndboss(boss, j) {
     boss.hitstaken++;
     this.level.endboss[j].hit();
@@ -104,7 +124,12 @@ class World {
   }
 
   checkPoisenThrow() {
-    if (this.keyboard.SPACE) {
+    const currentTime = Date.now();
+
+    if (
+      this.keyboard.SPACE &&
+      currentTime - this.lastPoisenThrowTime > this.poisenThrowCooldown
+    ) {
       if (this.player.poisen > 0) {
         let bottle = new ThrowPoisen(this.player.x, this.player.y);
         if (!isMutetd) {
@@ -112,7 +137,23 @@ class World {
         }
         this.throwPoisen.push(bottle);
         this.player.poisen -= 20;
+        this.lastPoisenThrowTime = currentTime; // Update the last throw time
       }
+    }
+  }
+  checkBubbleThrow() {
+    const currentTime = Date.now();
+
+    if (
+      this.keyboard.E &&
+      currentTime - this.lastShotTime > this.shotCooldown
+    ) {
+      let bubble = new throwBubble(this.player.x, this.player.y);
+      if (!isMutetd) {
+        //Sound
+      }
+      this.throwBubble.push(bubble);
+      this.lastShotTime = currentTime; // Update the last shot time
     }
   }
 
@@ -159,6 +200,7 @@ class World {
     this.addToMapArray(this.level.coins);
     this.addToMapArray(this.level.poisen);
     this.addToMapArray(this.throwPoisen);
+    this.addToMapArray(this.throwBubble);
   }
 
   drawMapFun() {

@@ -39,6 +39,9 @@ window.addEventListener("keydown", (e) => {
   if (e.code === "Space") {
     keyboard.SPACE = true;
   }
+  if (e.code === "KeyE") {
+    keyboard.E = true;
+  }
 });
 
 window.addEventListener("keyup", (e) => {
@@ -56,6 +59,9 @@ window.addEventListener("keyup", (e) => {
   }
   if (e.code === "Space") {
     keyboard.SPACE = false;
+  }
+  if (e.code === "KeyE") {
+    keyboard.E = false;
   }
 });
 
