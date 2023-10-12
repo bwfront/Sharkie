@@ -1,3 +1,7 @@
+/**
+ * Represents a throwable bubble object in the game.
+ * @extends MovableObject
+ */
 class ThrowBubble extends MovableObject {
   /**
    * Set the bottle which is thrown and its measures
@@ -13,7 +17,13 @@ class ThrowBubble extends MovableObject {
     this.direction = direction; // Store the direction
     this.throw();
   }
+
+  /** @type {Audio} The sound played when bubble is thrown. */
   bubble_sound = new Audio("./audio/bubble.mp3");
+
+  /**
+   * x / y speed and Direction of throwBubble
+   */
   throw() {
     this.startX = this.x;
     setInterval(() => {

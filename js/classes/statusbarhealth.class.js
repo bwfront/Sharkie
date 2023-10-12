@@ -1,4 +1,11 @@
+/**
+ * Represents a poison status bar in the game.
+ * @extends DrawableObject
+ */
 class StatusBarHealth extends DrawableObject {
+  /**
+   * @type {string[]} The array of image paths representing the different health statusbar levels.
+   */
   IMAGES = [
     "./img/4. Marcadores/orange/100_  copia.png",
     "./img/4. Marcadores/orange/80_  copia.png",
@@ -8,7 +15,11 @@ class StatusBarHealth extends DrawableObject {
     "./img/4. Marcadores/orange/0_  copia.png",
   ];
 
+  /**
+   * @type {number} The player's current health.
+   */
   playerhealth = 100;
+
   constructor() {
     super();
     this.loadImages(this.IMAGES);
@@ -19,14 +30,27 @@ class StatusBarHealth extends DrawableObject {
     this.setHealth(100);
   }
 
+  /**
+   * Sets the player's health.
+   * @param {number} playerhealth - The player's health.
+   */
   setHealth(playerhealth) {
     this.playerhealth = playerhealth;
     this.setStatus();
   }
+
+  /**
+   * Returns the index for image selection.
+   * @returns {number} The image index based on the player's health.
+   */
   getIndex() {
     return this.getHealthIndex();
   }
 
+  /**
+   * Determines the correct image index based on the player's playerhealth level.
+   * @returns {number} The image index based on the player's playerhealth level.
+   */
   getHealthIndex() {
     if (this.playerhealth == 100) {
       return 0;

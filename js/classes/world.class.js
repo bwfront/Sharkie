@@ -1,23 +1,56 @@
 class World {
+  /** @type {Player} The main player of the game. */
   player = new Player();
+
+  /** @type {Level|null} The current level of the game. */
   level;
+
+  /** @type {Audio} The background audio for the world. */
   background_audio = new Audio("./audio/bgmusic.mp3");
+
+  /** @type {HTMLCanvasElement|null} The canvas element to render the world. */
   canvas;
+
+  /** @type {CanvasRenderingContext2D|null} The context for drawing onto the canvas. */
   ctx;
+
+  /** @type {Keyboard|null} The keyboard input handler. */
   keyboard;
+
+  /** @type {number} A counter used for determining end boss interaction. */
   l = 0;
+
+  /** @type {number} Represents the camera's x-axis offset. */
   camera_x = 0;
+
+  /** @type {StatusBarHealth} Represents the player's health status bar. */
   statusBarHealth = new StatusBarHealth();
+
+  /** @type {StatusBarCoin} Represents the player's coin status bar. */
   statusBarCoin = new StatusBarCoin();
+
+  /** @type {StatusBarPoisen} Represents the player's poison status bar. */
   statusBarPoisen = new StatusBarPoisen();
+
+  /** @type {ThrowPoisen[]} Array of poison throw instances. */
   throwPoisen = [];
 
+  /** @type {ThrowBubble[]} Array of bubble throw instances. */
   throwBubble = [];
-  lastShotTime = 0;
-  shotCooldown = 900; // 0.8seconds in milliseconds
-  lastPoisenThrowTime = 0;
-  poisenThrowCooldown = 700; // 0.7seconds in milliseconds
 
+  /** @type {number} The cooldown for shooting bubble/throwing poison in milliseconds. */
+  shotCooldown = 900;
+  poisenThrowCooldown = 700;
+
+  /** @type {number} The time of the last bubble/poison throw. */
+  lastPoisenThrowTime = 0;
+  lastShotTime = 0;
+
+  /**
+   * Creates a new world instance.
+   * @param {HTMLCanvasElement} canvas - The canvas to draw the world on.
+   * @param {Keyboard} keyboard - The keyboard input handler.
+   */
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -34,6 +67,9 @@ class World {
     this.player.world = this;
   }
 
+  /**
+   * Runs collision checks and other game updates at a regular interval.
+   */
   run() {
     setInterval(() => {
       this.checkCollision();
@@ -190,6 +226,9 @@ class World {
     }
   }
 
+  /**
+   * Draws the game objects onto the canvas.
+   */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
@@ -222,12 +261,20 @@ class World {
     this.addToMap(this.statusBarPoisen);
   }
 
+  /**
+   * Helper function to add multiple objects to the game world for drawing.
+   * @param {any[]} y - An array of game objects.
+   */
   addToMapArray(y) {
     y.forEach((x) => {
       this.addToMap(x);
     });
   }
 
+  /**
+   * Adds a single game object to the game world for drawing.
+   * @param {any} obj - A game object.
+   */
   addToMap(obj) {
     if (obj.otherDirection) {
       this.flipImage(obj);
@@ -240,6 +287,10 @@ class World {
     }
   }
 
+  /**
+   * Flips an image horizontally for drawing.
+   * @param {any} obj - A game object with an image to flip.
+   */
   flipImage(obj) {
     this.ctx.save();
     this.ctx.translate(obj.width, 0);
@@ -247,6 +298,10 @@ class World {
     obj.x = obj.x * -1;
   }
 
+  /**
+   * Reverts the horizontal flip of an image after drawing.
+   * @param {any} obj - A game object with an image that was flipped.
+   */
   flipImageBack(obj) {
     obj.x = obj.x * -1;
     this.ctx.restore();

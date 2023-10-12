@@ -1,20 +1,28 @@
+/**
+ * Initialize and start the main menu.
+ */
 function mainMenuStart() {
   canvas = document.getElementById("canvas");
   menu = document.getElementById("mainmenu");
   hud = document.getElementById("mobile-hud");
-
   hud.style.display = "flex";
   menu.style.display = "none";
   canvas.style.display = "unset";
   init();
   checkMuted();
 }
-
+/**
+ * Checks whether audio is muted and applies mute settings if true.
+ */
 function checkMuted() {
   if (isMutetd) {
     muteAllAudio();
   }
 }
+
+/**
+ * Display the main menu and hide the game canvas and mobile HUD.
+ */
 function displayMenu() {
   canvas = document.getElementById("canvas");
   menu = document.getElementById("mainmenu");
@@ -25,12 +33,18 @@ function displayMenu() {
   world[0].background_audio.pause();
 }
 
+/**
+ * Generate and display the "Game Over" HTML in the main menu.
+ */
 function GameOverMenu() {
   exitFullscreenCheck();
   displayMenu();
   GameOverHTML();
 }
 
+/**
+ * Display the controls view in the menu.
+ */
 function closeControl() {
   const menu = document.getElementById("mainmenu");
   menu.innerHTML = `
@@ -53,6 +67,9 @@ function closeControl() {
   readAudio();
 }
 
+/**
+ * Display the controls view in the menu.
+ */
 function openControl() {
   const menu = document.getElementById("mainmenu");
   menu.innerHTML = `
@@ -73,6 +90,9 @@ function openControl() {
     `;
 }
 
+/**
+ * Generate and display the "Game Over" HTML in the main menu.
+ */
 function GameOverHTML() {
   const menu = document.getElementById("mainmenu");
   menu.innerHTML = `
@@ -95,6 +115,9 @@ function GameOverHTML() {
   readAudio();
 }
 
+/**
+ * Display the victory menu.
+ */
 function menuVictory() {
   exitFullscreenCheck();
   displayMenu();
@@ -105,6 +128,10 @@ function menuVictory() {
   readAudio();
 }
 
+/**
+ * Generate and return the "Victory" HTML for the main menu.
+ * @returns {string} The HTML string for the victory view.
+ */
 function menuVictoryHTML() {
   return `
   <div class="icon-div">
@@ -124,6 +151,10 @@ function menuVictoryHTML() {
     </div>
 `;
 }
+
+/**
+ * Exit fullscreen, after Win/Lose mode if the document is currently in fullscreen.
+ */
 function exitFullscreenCheck() {
   if (document.fullscreenElement) {
     document.exitFullscreen();

@@ -1,6 +1,24 @@
+/**
+ * Main canvas element.
+ * @type {HTMLCanvasElement}
+ */
 let canvas;
+
+/**
+ * Instance of the keyboard handler.
+ * @type {Keyboard}
+ */
 let keyboard = new Keyboard();
+
+/**
+ * Array representing the game world.
+ * @type {Array<World>}
+ */
 let world = [];
+
+/**
+ * Initialize the game world and setup the canvas.
+ */
 function init() {
   canvas = document.getElementById("canvas");
   if (world.length > 0) {
@@ -11,6 +29,9 @@ function init() {
   world.push(new World(canvas, keyboard));
 }
 
+/**
+ * Toggle fullscreen mode.
+ */
 function toggleFullscreen() {
   if (!document.fullscreenElement) {
     canvas.requestFullscreen().catch((err) => {
@@ -23,6 +44,9 @@ function toggleFullscreen() {
   }
 }
 
+/**
+ * Event listener for keydown event to capture player movements and actions.
+ */
 window.addEventListener("keydown", (e) => {
   if (e.code === "KeyW") {
     keyboard.UP = true;
@@ -44,6 +68,9 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
+/**
+ * Event listener for keyup event to release player movements and actions.
+ */
 window.addEventListener("keyup", (e) => {
   if (e.code === "KeyW") {
     keyboard.UP = false;
@@ -65,6 +92,9 @@ window.addEventListener("keyup", (e) => {
   }
 });
 
+/**
+ * Event listeners for touch controls to allow game interactivity on mobile devices.
+ */
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("btn-up").addEventListener("touchstart", (e) => {
     e.preventDefault();

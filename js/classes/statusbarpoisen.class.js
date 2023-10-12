@@ -1,4 +1,11 @@
+/**
+ * Represents a poison status bar in the game.
+ * @extends DrawableObject
+ */
 class StatusBarPoisen extends DrawableObject {
+  /**
+   * @type {string[]} The array of image paths representing the different poisen fill level.
+   */
   IMAGES = [
     "./img/4. Marcadores/orange/0_ copia.png",
     "./img/4. Marcadores/orange/20_ copia.png",
@@ -8,6 +15,9 @@ class StatusBarPoisen extends DrawableObject {
     "./img/4. Marcadores/orange/100_ copia.png",
   ];
 
+  /**
+   * @type {number} The player's current poison 'inventar'.
+   */
   playerPoisen = 0;
 
   constructor() {
@@ -20,14 +30,27 @@ class StatusBarPoisen extends DrawableObject {
     this.setPoisen(0);
   }
 
+  /**
+   * Sets the player's poison.
+   * @param {number} playerPoisen - The player's poison 'inventar'.
+   */
   setPoisen(playerPoisen) {
     this.playerPoisen = playerPoisen;
     this.setStatus();
   }
+
+  /**
+   * Returns the index for image selection.
+   * @returns {number} The image index based on the player's poison 'inventar'.
+   */
   getIndex() {
     return this.getPoisenIndex();
   }
 
+  /**
+   * Determines the correct image index based on the player's poison level.
+   * @returns {number} The image index based on the player's poison level.
+   */
   getPoisenIndex() {
     if (this.playerPoisen > 100) {
       return 5;
