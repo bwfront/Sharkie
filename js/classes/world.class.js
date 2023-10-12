@@ -11,6 +11,7 @@ class World {
   statusBarCoin = new StatusBarCoin();
   statusBarPoisen = new StatusBarPoisen();
   throwPoisen = [];
+
   throwBubble = [];
   lastShotTime = 0;
   shotCooldown = 900; // 0.8seconds in milliseconds
@@ -45,7 +46,7 @@ class World {
       this.checkThrowPoisenHitsEndboss();
       this.distanceEndbossPlayer();
       this.checkCollisionEndboss();
-    }, 100);
+    }, 50);
   }
 
   distanceEndbossPlayer() {
@@ -71,17 +72,17 @@ class World {
 
   checkThrowBubbleHitsEnemy() {
     for (let i = this.throwBubble.length - 1; i >= 0; i--) {
-        let bubble = this.throwBubble[i];
-        for (let j = this.level.enemies.length - 1; j >= 0; j--) {
-            let enemy = this.level.enemies[j];
-            if (bubble.isColliding(enemy)) { 
-                this.level.enemies.splice(j, 1);
-                this.throwBubble.splice(i, 1);
-                break;
-            }
+      let bubble = this.throwBubble[i];
+      for (let j = this.level.enemies.length - 1; j >= 0; j--) {
+        let enemy = this.level.enemies[j];
+        if (bubble.isColliding(enemy)) {
+          this.level.enemies.splice(j, 1);
+          this.throwBubble.splice(i, 1);
+          break;
         }
+      }
     }
-}
+  }
   hitEndboss(boss, j) {
     boss.hitstaken++;
     this.level.endboss[j].hit();
@@ -131,7 +132,12 @@ class World {
       currentTime - this.lastPoisenThrowTime > this.poisenThrowCooldown
     ) {
       if (this.player.poisen > 0) {
-        let bottle = new ThrowPoisen(this.player.x, this.player.y);
+        let bottleDirection = this.player.otherDirection ? "left" : "right";
+        let bottle = new ThrowPoisen(
+          this.player.x,
+          this.player.y,
+          bottleDirection
+        );
         if (!isMutetd) {
           bottle.throw_sound.play();
         }
@@ -148,9 +154,14 @@ class World {
       this.keyboard.E &&
       currentTime - this.lastShotTime > this.shotCooldown
     ) {
-      let bubble = new throwBubble(this.player.x, this.player.y);
+      let bubbleDirection = this.player.otherDirection ? "left" : "right";
+      let bubble = new ThrowBubble(
+        this.player.x,
+        this.player.y,
+        bubbleDirection
+      );
       if (!isMutetd) {
-        //Sound
+        bubble.bubble_sound.play();
       }
       this.throwBubble.push(bubble);
       this.lastShotTime = currentTime; // Update the last shot time
