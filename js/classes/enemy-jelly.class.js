@@ -11,7 +11,7 @@ class EnemyJelly extends MovableObject {
 
   constructor() {
     super().loadImage("./img/2.Enemy/2 Jelly fish/S｣per dangerous/Pink 1.png");
-    this.x = 400 + Math.random() * 500;
+    this.x = 400 + Math.random() * 2300;
     this.y = 40 + Math.random() * 300;
 
     this.loadImages(this.IMAGES_SWIM);

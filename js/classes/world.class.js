@@ -42,7 +42,7 @@ class World {
   }
 
   distanceEndbossPlayer() {
-    if (this.player.x > 500 && this.l == 0) {
+    if (this.player.x > 2850 && this.l == 0) {
       this.l++;
       this.level.endboss[0].attack();
     }

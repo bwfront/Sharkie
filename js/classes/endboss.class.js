@@ -2,7 +2,7 @@ class Endboss extends MovableObject {
   height = 700;
   width = 700;
   y = -200;
-  x = 1050;
+  x = 3390;
   hitstaken = 0;
   IMAGES_SWIM = [
     "./img/2.Enemy/3 Final Enemy/2.floating/1.png",

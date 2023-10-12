@@ -3,7 +3,8 @@ class Floor1 extends MovableObject {
   y = 80;
   height = 400;
   width = 1440;
-  constructor() {
+  constructor(x) {
     super().loadImage("./img/3. Background/Legacy/Layers/2. Floor/L3.png");
+    this.x = x;
   }
 }

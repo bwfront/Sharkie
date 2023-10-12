@@ -3,7 +3,7 @@ class Player extends MovableObject {
   y = 150;
   height = 160;
   width = 160;
-  speed = 1;
+  speed = 4;
   health = 100;
   IMAGES_SWIM = [
     "./img/1.Sharkie/3.Swim/1.png",
@@ -113,7 +113,8 @@ class Player extends MovableObject {
   }
 
   moveingRight() {
-    if (this.x < 760) {
+    //Change 760
+    if (this.x < 3100) {
       this.x += this.speed;
       this.otherDirection = false;
       this.world.camera_x += -this.speed;
