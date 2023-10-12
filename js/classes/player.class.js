@@ -1,14 +1,43 @@
+/**
+ * Represents the main player character, Sharkie, in the game.
+ * @extends MovableObject
+ */
 class Player extends MovableObject {
+  /**
+   * @type {number} The initial x-coordinate of the player.
+   */
   x = 40;
+
+  /**
+   * @type {number} The initial <-coordinate of the player.
+   */
   y = 150;
+
+  /**
+   * @type {number} The initial <-height of the player.
+   */
   height = 160;
+
+  /**
+   * @type {number} The initial <-width of the player.
+   */
   width = 160;
+
+  /**
+   * @type {number} The initial <-Speed of the player.
+   */
   speed = 4;
+
+  /**
+   * @type {number} The initial <-Health of the player.
+   */
   health = 100;
+
   bubbleAnimationPlaying = false;
   lastBubbleAnimationTime = 0;
   bubbleAnimationCooldown = 1000; // 1 second cooldown
   attack = true;
+
   IMAGES_SWIM = [
     "./img/1.Sharkie/3.Swim/1.png",
     "./img/1.Sharkie/3.Swim/3.png",
@@ -55,19 +84,28 @@ class Player extends MovableObject {
     "./img/1.Sharkie/5.Hurt/2.Electric shock/2.png",
     "./img/1.Sharkie/5.Hurt/2.Electric shock/3.png",
   ];
-  IMAGES_BUBBLE =
-  [
+  IMAGES_BUBBLE = [
     "./img/1.Sharkie/Bubble trap/op1 (with bubble formation)/3.png",
     "./img/1.Sharkie/Bubble trap/op1 (with bubble formation)/5.png",
     "./img/1.Sharkie/Bubble trap/op1 (with bubble formation)/6.png",
     "./img/1.Sharkie/Bubble trap/op1 (with bubble formation)/7.png",
     "./img/1.Sharkie/Bubble trap/op1 (with bubble formation)/8.png",
-  ]
-
+  ];
+  /**
+   * Represents the world in which the player resides.
+   * @type {Object}
+   */
   world;
 
+  /**
+   * Audio file for the swimming sound of the player.
+   * @type {Audio}
+   */
   swim_sound = new Audio("./audio/sharkswim.mp3");
 
+  /**
+   * Creates a new Player object.
+   */
   constructor() {
     super().loadImage("./img/1.Sharkie/3.Swim/1.png");
     this.animate();
@@ -75,6 +113,9 @@ class Player extends MovableObject {
     this.swim_sound.volume = 0.5;
   }
 
+  /**
+   * Loads all the image assets for different animations of the player.
+   */
   playerloadImage() {
     this.loadImages(this.IMAGES_SWIM);
     this.loadImages(this.IMAGES_IDLE);
@@ -83,6 +124,9 @@ class Player extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
   }
 
+  /**
+   * Controls and manages all animations of the player based on the player's state.
+   */
   animate() {
     this.playerloadImage();
     let startBubble = false;
@@ -92,7 +136,7 @@ class Player extends MovableObject {
         this.playAnimation(this.IMAGES_DEAD);
         this.swim_sound.pause();
       } else if (this.world.keyboard.E && this.attack) {
-        this.attackCharacter()  // Reset flag after starting animation
+        this.attackCharacter(); // Reset flag after starting animation
       } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
       } else if (
@@ -109,27 +153,32 @@ class Player extends MovableObject {
       }
 
       if (this.world.keyboard.E) {
-        startBubble = true;  // Set flag to start bubble animation on next iteration
-        this.world.keyboard.E = false;  // Reset E key state so we don't continuously trigger
+        startBubble = true; // Set flag to start bubble animation on next iteration
+        this.world.keyboard.E = false; // Reset E key state so we don't continuously trigger
       }
     }, 1000 / 7);
-}
+  }
+  /**
+   * Handles the attack animation and its related functionality.
+   */
+  attackCharacter() {
+    this.timerForAnimation();
+    this.playAnimation(this.IMAGES_BUBBLE);
+  }
 
+  /**
+   * Timer to control and limit the frequency of the attack animation.
+   */
+  timerForAnimation() {
+    this.attack = false;
+    setTimeout(() => {
+      this.attack = true;
+    }, 50);
+  }
 
-attackCharacter() {
-  this.timerForAnimation();
-  this.playAnimation(this.IMAGES_BUBBLE);  
-  //this.bubble_sound.play();
-}
-timerForAnimation() {
-  this.attack = false;
-  setTimeout(() => {
-      this.attack = true;   
-  }, 50);
-}
-
-
-
+  /**
+   * Moves the player based on keyboard inputs.
+   */
   movingPlayer() {
     setInterval(() => {
       if (!this.isDead()) {
@@ -149,6 +198,9 @@ timerForAnimation() {
     }, 1000 / 60);
   }
 
+  /**
+   * Handles the movement of the player to the right.
+   */
   moveingRight() {
     //Change 760
     if (this.x < 3100) {
@@ -158,6 +210,9 @@ timerForAnimation() {
     }
   }
 
+  /**
+   * Handles the movement of the player to the left.
+   */
   moveingLeft() {
     if (this.x > 40) {
       this.x -= this.speed;
@@ -166,12 +221,18 @@ timerForAnimation() {
     }
   }
 
+  /**
+   * Handles the movement of the player to the up.
+   */
   moveingUP() {
     if (this.y > -80) {
       this.y -= this.speed + 0.5;
     }
   }
 
+  /**
+   * Handles the movement of the player to the down.
+   */
   moveingDown() {
     if (this.y < 280) {
       this.y += this.speed + 0.5;

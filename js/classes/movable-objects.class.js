@@ -1,13 +1,30 @@
+/**
+ * Represents an object that can move and interact within the game environment.
+ * @extends DrawableObject
+ */
 class MovableObject extends DrawableObject {
+  /**
+   * @type {number} The speed at which the object moves.
+   */
   speed;
   otherDirection = false;
-  lastHit = 0;
+
+  /**
+   * @type {number} The Cooldown at which the Player get -health.
+   */
+  lastHit = 100;
   coin = 0;
   poisen = 80;
   coin_sound = new Audio("./audio/coin.wav");
   die_sound = new Audio("./audio/die.wav");
   i = 0;
   j = 0;
+
+  /**
+   * Determines if two objects are colliding based on their bounding boxes.
+   * @param {Object} obj - The other object to check for collision.
+   * @returns {boolean} True if the objects are colliding, false otherwise.
+   */
   isColliding(obj) {
     return (
       this.x + this.width >= obj.x &&
@@ -16,6 +33,20 @@ class MovableObject extends DrawableObject {
       this.y <= obj.y + obj.height
     );
   }
+
+  /**
+   * Adds poison value to the object's poison count and plays a sound effect.
+   */
+  addPoisen() {
+    this.coin_sound.play();
+    this.poisen += 20;
+  }
+
+  /**
+   * Determines if the object is colliding with a player using more specific bounding box values.
+   * @param {Object} obj - The player object to check for collision.
+   * @returns {boolean} True if the objects are colliding, false otherwise.
+   */
   isCollidingPlayer(obj) {
     let yOffsetTop = 0.45 * this.height;
     let xOffset = 0.1 * this.width;
@@ -28,8 +59,10 @@ class MovableObject extends DrawableObject {
     );
   }
 
+  /**
+   * Decreases the health of the object by a set value.
+   */
   hit() {
-    //change to 10
     this.health -= 10;
     if (this.health < 0) {
       this.health = 0;
@@ -44,12 +77,20 @@ class MovableObject extends DrawableObject {
     }
   }
 
+  /**
+   * Checks if the object has recently been hurt.
+   * @returns {boolean} True if the object was hurt within a specific time frame, false otherwise.
+   */
   isHurt() {
     let timePassed = new Date().getTime() - this.lastHit;
     timePassed = timePassed / 1000;
     return timePassed < 2;
   }
 
+  /**
+   * Checks if the object is dead (has no health left).
+   * @returns {boolean} True if the object is dead, false otherwise.
+   */
   isDead() {
     if (this.health == 0 && this.j == 0) {
       this.j++;
@@ -58,16 +99,18 @@ class MovableObject extends DrawableObject {
     return this.health == 0;
   }
 
+  /**
+   * Adds a coin value to the object's coin count and plays a sound effect.
+   */
   addCoin() {
     this.coin_sound.play();
     this.coin += 20;
   }
 
-  addPoisen() {
-    this.coin_sound.play();
-    this.poisen += 20;
-  }
-
+  /**
+   * Plays an animation for the object based on a set of images.
+   * @param {Array<string>} images - An array of paths to the images that make up the animation.
+   */
   playAnimation(images) {
     let i = this.currentImage % images.length;
     let path = images[i];
@@ -75,6 +118,9 @@ class MovableObject extends DrawableObject {
     this.currentImage++;
   }
 
+  /**
+   * Moves the Enemies to the left based on its speed.
+   */
   moveLeft() {
     setInterval(() => {
       this.x -= this.speed;

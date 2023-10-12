@@ -1,3 +1,8 @@
+/**
+ * Creates and returns the first level of the game, with a specific set of game objects.
+ * 
+ * @returns {level} A new instance of the 'level' class containing predefined enemies, background objects, coins, poisons, and an end boss.
+ */
 function createLevel1() {
   return new level(
     [

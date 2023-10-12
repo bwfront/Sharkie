@@ -1,7 +1,21 @@
+/**
+ * Represents a poison object in the game.
+ * @extends MovableObject
+ */
 class Poisen extends MovableObject {
+  /**
+   * @type {number} The height of the poison object.
+   */
   height = 40;
+
+  /**
+   * @type {number} The width of the poison object.
+   */
   width = 40;
 
+  /**
+   * @type {string[]} The array of image paths for the idle animation of the poison object.
+   */
   IMAGES_IDLE = [
     "./img/4. Marcadores/Poisen/Animada/1.png",
     "./img/4. Marcadores/Poisen/Animada/2.png",
@@ -13,6 +27,9 @@ class Poisen extends MovableObject {
     "./img/4. Marcadores/Poisen/Animada/8.png",
   ];
 
+  /**
+   * Initializes a new instance of the Poisen class.
+   */
   constructor() {
     super().loadImage("./img/4. Marcadores/Poisen/Animada/1.png");
     this.x = 200 + Math.random() * 2300;
@@ -21,6 +38,10 @@ class Poisen extends MovableObject {
     this.loadImages(this.IMAGES_IDLE);
     this.animate();
   }
+
+  /**
+   * Animates the poison object using the idle animation images.
+   */
   animate() {
     setInterval(() => {
       this.playAnimation(this.IMAGES_IDLE);
