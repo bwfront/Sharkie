@@ -38,7 +38,7 @@ class World {
       this.checkThrowPoisenHitsEndboss();
       this.distanceEndbossPlayer();
       this.checkCollisionEndboss();
-    }, 100);
+    }, 200);
   }
 
   distanceEndbossPlayer() {

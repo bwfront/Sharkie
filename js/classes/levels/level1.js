@@ -35,6 +35,11 @@ function createLevel1() {
       new EnemyJelly(),
       new EnemyJelly(),
       new EnemyJelly(),
+      new EnemyJelly(),
+      new EnemyJelly(),
+      new EnemyJelly(),
+      new EnemyJelly(),
+      new EnemyJelly(),
       new EnemyJelly()
     ],
     [new bgWater(0), new bgFondo2(0), new bgFondo1(0), new Light(0), new Floor1(0),new bgWater(1440), new bgFondo2(1440), new bgFondo1(1440), new Floor1(1440), new bgWater(2880), new bgFondo2(2880), new bgFondo1(2880), new Floor1(2880)],

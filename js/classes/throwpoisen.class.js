@@ -13,8 +13,8 @@ class ThrowPoisen extends MovableObject {
     this.startX = this.x;
     setInterval(() => {
       if (this.x - this.startX < 800) {
-        this.x += 2;
-        this.y += 0.6;
+        this.x += 3;
+        this.y += 0.3;
       }
     }, 1000 / 150);
   }

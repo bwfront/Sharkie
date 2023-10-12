@@ -20,7 +20,7 @@ class StatusBarHealth extends DrawableObject {
   }
 
   setHealth(playerhealth) {
-    this.playerPoisen = playerhealth;
+    this.playerhealth = playerhealth;
     this.setStatus();
   }
   getIndex() {
