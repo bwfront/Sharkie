@@ -54,14 +54,17 @@
     </div>
     <canvas id="canvas" width="720" height="480" style="display: none;"></canvas>
 
-        <div class="fullscreen" id="fullbtn" onclick="toggleFullscreen()">Fullscreen</div>
-        <div class="audio" id="audiobtn" onclick="setAudio()">Mute</div>
 
     <div class="mobile-hud" id="mobile-hud" style="display: none;">
-        <div class="hud-shoot">
-            <button id="btn-shoot">Shoot</button>
+        <div class="hud-shoot hud-none">
+            <button id="btn-shoot"><img src="./img/4. Marcadores/Poisen/Animada/2.png" alt="poisen" height="30px" width="30px"></button>
+            <button id="btn-bubble"><img src="./img/1.Sharkie/Bubble trap/Bubble.png" alt="bubble" height="30px" width="30px"></button>
         </div>
-        <div class="hud-swim">
+        <div>
+            <button id="btn-fullscreen" onclick="toggleFullscreen()">Fullscreen</button>
+            <button  id="btn-audio" onclick="setAudio()">Mute</button>
+        </div>
+        <div class="hud-swim hud-none">
             <button id="btn-up">↑</button>
             <div>
                 <button id="btn-left">←</button>

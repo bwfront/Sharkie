@@ -2,8 +2,7 @@ function mainMenuStart() {
   canvas = document.getElementById("canvas");
   menu = document.getElementById("mainmenu");
   hud = document.getElementById("mobile-hud");
-  fullbtm = document.getElementById("fullbtn");
-  fullbtm.style.display = "unset";
+
   hud.style.display = "flex";
   menu.style.display = "none";
   canvas.style.display = "unset";
@@ -20,8 +19,6 @@ function displayMenu() {
   canvas = document.getElementById("canvas");
   menu = document.getElementById("mainmenu");
   hud = document.getElementById("mobile-hud");
-  fullbtm = document.getElementById("fullbtn");
-  fullbtm.style.display = "none";
   hud.style.display = "none";
   menu.style.display = "unset";
   canvas.style.display = "none";
@@ -69,8 +66,9 @@ function openControl() {
         </div>
         <div id="heading">Control</div>
         <div class="control-con">
+        <div class="control-content"><img class="control-img img-cont" src="./img/1.Sharkie/Bubble trap/Bubble.png">E / Bubble</div>
+        <div class="control-content"><img class="control-img img-cont" src="./img/4. Marcadores/Poisen/Animada/2.png">SPACE / Poisen</div>
             <div class="control-content"><img class="control-img" src="img/6.Botones/Key/arrow keys.png">W A S D / SWIM</div>
-            <div class="control-content"><img class="control-img space" src="img/6.Botones/Key/Space Bar key.png">Shoot</div>
         </div>
     `;
 }

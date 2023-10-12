@@ -111,4 +111,13 @@ document.addEventListener("DOMContentLoaded", function () {
     e.preventDefault();
     keyboard.SPACE = false;
   });
+  document.getElementById("btn-bubble").addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    keyboard.E = true;
+  });
+
+  document.getElementById("btn-bubble").addEventListener("touchend", (e) => {
+    e.preventDefault();
+    keyboard.E = false;
+  });
 });

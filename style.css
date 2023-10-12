@@ -16,28 +16,14 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
 }
-.fullscreen, .audio {
-  font-size: 18px;
-  margin-top: 415px;
-  color: #ffffff;
-  z-index: 2;
-  cursor: pointer;
-  padding-bottom: 5px !important;
-  padding: 10px;
-  background-color: #bf077f;
-  border-radius: 10px;
-  border: solid 2px #ffffff;
-  position: fixed;
-  margin-right: 100px
-}
 #audiobtn{
   margin-left: 110px;
   margin-right: 0;
-
 }
-
-.fullscreen:hover,  .audio:hover{
-  box-shadow: 0px 0px 37px 7px rgba(243, 133, 255, 0.6);
+#btn-bubble img, #btn-shoot img{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #mainmenu {
   z-index: 3;
@@ -92,17 +78,27 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
+  justify-content: center;
   margin-top: 60px;
 }
 .control-img {
-  height: 120px;
+  height: 80px;
+  width: auto;
   margin-right: 40px;
 }
-.space {
-  height: 60px;
+.img-cont{
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  background-color: rgb(255, 127, 234);
+  border: solid #ffffff;
+  border-radius: 10px;
+  padding: 10px;
 }
 .control-content {
-  margin: 40px;
+  text-shadow: 3px 3px 10px rgba(167, 15, 178, 0.679);
+  margin: 10px;
   font-size: 35px;
   display: flex;
   align-items: center;
@@ -122,12 +118,15 @@ canvas {
   display: flex;
   justify-content: flex-end;
 }
-.mobile-hud {
+.hud-none{
   display: none !important;
-  margin-top: -130px;
+}
+.mobile-hud {
+
+  margin-top: -80px;
   z-index: 1;
-  width: 600px;
-  justify-content: space-between;
+  width: 720px;
+  justify-content: space-around;
   align-items: flex-end;
 }
 .hud-swim {
@@ -165,9 +164,12 @@ button:hover {
 }
 
 @media screen and (max-width: 1000px) {
-  .mobile-hud {
+  .mobile-hud, .hud-none {
     display: flex !important;
   }
+  .mobile-hud{
+    margin-top: -130px !important 
+    }
 }
 @media screen and (max-height: 700px) {
   .mobile-hud {
@@ -180,11 +182,17 @@ button:hover {
   .mobile-hud {
     width: 100vw;
   }
-  .fullscreen {
+  .mobile-hud{
+  margin-top: -130px !important
+  }
+  #btn-fullscreen {
     display: none !important;
   }
   #controls {
     display: none;
+  }
+  #heading{
+    margin-top: 70px;
   }
 }
 @media only screen and (max-height: 480px) {
@@ -195,8 +203,10 @@ button:hover {
   #mainmenu {
     height: 100vh;
   }
-
-  .fullscreen {
+  #heading{
+    margin-top: 70px;
+  }
+  #btn-fullscreen {
     display: none !important;
   }
   #controls {
