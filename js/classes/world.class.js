@@ -85,6 +85,10 @@ class World {
     }, 50);
   }
 
+  /**
+   * Check if Player is near to Enbboos
+   * Swim toward the Player
+   */
   distanceEndbossPlayer() {
     if (this.player.x > 2850 && this.l == 0) {
       this.l++;
@@ -92,6 +96,10 @@ class World {
     }
   }
 
+  /**
+   * Check if Poisen hit Endboss
+   * Remove Poisen
+   */
   checkThrowPoisenHitsEndboss() {
     for (let i = this.throwPoisen.length - 1; i >= 0; i--) {
       let bottle = this.throwPoisen[i];
@@ -106,6 +114,24 @@ class World {
     }
   }
 
+  /**
+   * Check if Poisen hit Endboss 5 times
+   * Victory called
+   */
+  hitEndboss(boss, j) {
+    boss.hitstaken++;
+    this.level.endboss[j].hit();
+    if (boss.hitstaken >= 5) {
+      this.level.endboss.splice(j, 1);
+      menuVictory();
+    }
+  }
+
+  /**
+   * Check if Bubble hit Enemy times
+   * Remove ThrowBubble
+   * Remove Enemy
+   */
   checkThrowBubbleHitsEnemy() {
     for (let i = this.throwBubble.length - 1; i >= 0; i--) {
       let bubble = this.throwBubble[i];
@@ -119,15 +145,10 @@ class World {
       }
     }
   }
-  hitEndboss(boss, j) {
-    boss.hitstaken++;
-    this.level.endboss[j].hit();
-    if (boss.hitstaken >= 5) {
-      this.level.endboss.splice(j, 1);
-      menuVictory();
-    }
-  }
 
+  /**
+   * Check if Poisen hit Enemy
+   */
   checkThrowPoisenHitsEnemy() {
     for (let i = this.throwPoisen.length - 1; i >= 0; i--) {
       let bottle = this.throwPoisen[i];
@@ -142,6 +163,9 @@ class World {
     }
   }
 
+  /**
+   * Check if Player Collide with Endboss
+   */
   checkCollisionEndboss() {
     this.level.endboss.forEach((endboss) => {
       if (this.player.isCollidingPlayer(endboss)) {
@@ -151,6 +175,9 @@ class World {
     });
   }
 
+  /**
+   * Check if Player Collide with Enemy
+   */
   checkCollision() {
     this.level.enemies.forEach((enemy) => {
       if (this.player.isCollidingPlayer(enemy)) {
@@ -160,9 +187,12 @@ class World {
     });
   }
 
+  /**
+   * Check if Player Press SPace and if the Cooldown is over
+   * Create a new ThrowPoisen Object
+   */
   checkPoisenThrow() {
     const currentTime = Date.now();
-
     if (
       this.keyboard.SPACE &&
       currentTime - this.lastPoisenThrowTime > this.poisenThrowCooldown
@@ -183,9 +213,13 @@ class World {
       }
     }
   }
+
+  /**
+   * Check if Player Press E and if the Cooldown is over
+   * Create a new ThrowBubble Object
+   */
   checkBubbleThrow() {
     const currentTime = Date.now();
-
     if (
       this.keyboard.E &&
       currentTime - this.lastShotTime > this.shotCooldown
@@ -204,6 +238,9 @@ class World {
     }
   }
 
+  /**
+   * Check if Player Collide with Coin / Calls add Coin / Splice the Coin
+   */
   checkCollisionCoin() {
     for (let i = this.level.coins.length - 1; i >= 0; i--) {
       let coin = this.level.coins[i];
@@ -215,6 +252,9 @@ class World {
     }
   }
 
+  /**
+   * Check if Player Collide with Poisen / Calls add Poisen / Splice the Poisen
+   */
   checkCollisionPoisen() {
     this.statusBarPoisen.setPoisen(this.player.poisen);
     for (let i = this.level.poisen.length - 1; i >= 0; i--) {
@@ -243,6 +283,10 @@ class World {
     this.drawMapFun();
   }
 
+  /**
+   * Helper function to add multiple objects to the game world for drawing.
+   * @param {any[]} y - An array of game objects.
+   */
   drawArrayFun() {
     this.addToMapArray(this.level.backgroundObjects);
     this.addToMapArray(this.level.enemies);
@@ -253,6 +297,10 @@ class World {
     this.addToMapArray(this.throwBubble);
   }
 
+  /**
+   * Adds a single game object to the game world for drawing.
+   * @param {any} obj - A game object.
+   */
   drawMapFun() {
     this.addToMap(this.player);
     this.ctx.translate(-this.camera_x, 0);

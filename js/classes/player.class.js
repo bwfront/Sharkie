@@ -225,7 +225,7 @@ class Player extends MovableObject {
    * Handles the movement of the player to the up.
    */
   moveingUP() {
-    if (this.y > -80) {
+    if (this.y > -60) {
       this.y -= this.speed + 0.5;
     }
   }

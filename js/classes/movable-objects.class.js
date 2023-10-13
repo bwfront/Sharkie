@@ -63,7 +63,7 @@ class MovableObject extends DrawableObject {
    * Decreases the health of the object by a set value.
    */
   hit() {
-    this.health -= 10;
+    this.health -= 3;
     if (this.health < 0) {
       this.health = 0;
       if (this.i < 15) {
