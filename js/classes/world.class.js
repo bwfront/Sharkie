@@ -210,6 +210,8 @@ class World {
         this.throwPoisen.push(bottle);
         this.player.poisen -= 20;
         this.lastPoisenThrowTime = currentTime; // Update the last throw time
+      } else {
+        return null;
       }
     }
   }
