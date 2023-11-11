@@ -146,7 +146,7 @@ class Player extends MovableObject {
         this.world.keyboard.UP
       ) {
         this.playAnimation(this.IMAGES_SWIM);
-        this.swim_sound.play();
+        this.swimSound();
       } else {
         this.swim_sound.pause();
         this.playAnimation(this.IMAGES_IDLE);
@@ -157,6 +157,10 @@ class Player extends MovableObject {
         this.world.keyboard.E = false; // Reset E key state so we don't continuously trigger
       }
     }, 1000 / 7);
+  }
+
+  swimSound() {
+    this.swim_sound.play();
   }
   /**
    * Handles the attack animation and its related functionality.

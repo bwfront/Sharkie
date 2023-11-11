@@ -15,8 +15,7 @@ class MovableObject extends DrawableObject {
   lastHit = 100;
   coin = 0;
   poisen = 80;
-  coin_sound = new Audio("./audio/coin.wav");
-  die_sound = new Audio("./audio/die.wav");
+
   i = 0;
   j = 0;
 
@@ -38,7 +37,7 @@ class MovableObject extends DrawableObject {
    * Adds poison value to the object's poison count and plays a sound effect.
    */
   addPoisen() {
-    this.coin_sound.play();
+    audioCoinSound();
     this.poisen += 20;
   }
 
@@ -67,10 +66,10 @@ class MovableObject extends DrawableObject {
     if (this.health < 0) {
       this.health = 0;
       if (this.i < 15) {
-        this.die_sound.play();
+        audioDieSound();
         this.i++;
       } else {
-        this.die_sound.pause();
+        audioDieSoundStop();
       }
     } else {
       this.lastHit = new Date().getTime();
@@ -95,6 +94,7 @@ class MovableObject extends DrawableObject {
     if (this.health == 0 && this.j == 0) {
       this.j++;
       GameOverMenu();
+      deleteAllAudioInstances();
     }
     return this.health == 0;
   }
@@ -103,7 +103,7 @@ class MovableObject extends DrawableObject {
    * Adds a coin value to the object's coin count and plays a sound effect.
    */
   addCoin() {
-    this.coin_sound.play();
+    audioCoinSound();
     this.coin += 20;
   }
 

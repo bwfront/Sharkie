@@ -10,6 +10,8 @@ window.allAudioInstances = [];
  */
 let isMutetd = false;
 
+let coin_sound = new Audio("./audio/coin.wav");
+let die_sound = new Audio("./audio/die.wav");
 /**
  * Reference to the original Audio constructor.
  * @type {Function}
@@ -91,4 +93,31 @@ function unmuteHTML() {
 function muteHTML() {
   return `                
     Sound`;
+}
+
+function deleteAllAudioInstances() {
+  if (window.allAudioInstances && Array.isArray(window.allAudioInstances)) {
+    window.allAudioInstances.forEach((audioInstance, index) => {
+      if (audioInstance && typeof audioInstance.pause === "function") {
+        audioInstance.pause();
+        if (audioInstance.parentNode) {
+          audioInstance.parentNode.removeChild(audioInstance);
+        }
+      } else {
+      }
+    });
+    window.allAudioInstances = [];
+  } else {
+  }
+}
+
+function audioCoinSound() {
+  coin_sound.play();
+}
+
+function audioDieSound() {
+  die_sound.play();
+}
+function audioDieSoundStop() {
+  die_sound.pause();
 }
