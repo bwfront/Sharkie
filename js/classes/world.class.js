@@ -280,6 +280,7 @@ class World {
     let self = this;
     requestAnimationFrame(function () {
       self.draw();
+      
     });
 
     this.drawMapFun();

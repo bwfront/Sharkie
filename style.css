@@ -172,6 +172,19 @@ button:hover {
 #rotateScreenImage {
   width: 50px;
 }
+
+.privacy{
+  margin-top: 40px;
+}
+.privacy-body{
+  height: 100%;
+  padding: 50px 0 0 50px;
+  margin-top: 350px;
+  background-image: url("./img/3. Background/Legacy/Layers/5. Water/L3.png");
+  background-size: cover;
+  background-color: rgb(0, 166, 255);
+  color: #313131;
+}
 @media screen and (max-width: 1000px) {
   .mobile-hud,
   .hud-none {
@@ -246,3 +259,4 @@ button:hover {
     display: flex;
   }
 }
+
